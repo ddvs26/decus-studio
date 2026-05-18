@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data &amp; Automation — Decus</title>
+<meta name="description" content="Dashboards, automatización, CRM, hub operativo e IA personalizada para pequeños y medianos negocios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--sage-dim:rgba(143,168,155,.15);--fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);line-height:1.65;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--carbon);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-family:var(--fs);font-size:1.3rem;font-weight:700;color:var(--ivory);letter-spacing:-.5px}
+.nav-list{list-style:none;display:flex;align-items:center;gap:1.5rem}
+.nav-list a{color:rgba(246,244,241,.6);text-decoration:none;font-size:.83rem;font-family:var(--fb);transition:color .2s}
+.nav-list a:hover{color:var(--ivory)}
+.nav-cta{background:var(--sage)!important;color:var(--carbon)!important;padding:.45rem 1rem;border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important}
+.hamburger{display:none;background:none;border:none;color:var(--ivory);cursor:pointer;padding:.25rem}
+.hamburger svg{width:22px;height:22px}
+@media(max-width:768px){.nav-list{display:none;position:absolute;top:100%;left:0;right:0;background:var(--carbon);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem;border-top:1px solid rgba(255,255,255,.08)}.nav-list.open{display:flex}.hamburger{display:block}}
+.page-hero{background:var(--carbon);color:var(--ivory);padding:7rem 2rem 5rem;margin-top:60px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(45,110,110,.2) 0%,transparent 60%);pointer-events:none}
+.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.page-tag{display:inline-block;background:rgba(143,168,155,.15);color:var(--sage);padding:.3rem .9rem;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(143,168,155,.2);margin-bottom:1.5rem}
+.page-hero h1{font-family:var(--fs);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1rem}
+.page-hero h1 em{font-style:normal;color:var(--sage)}
+.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.65);max-width:600px;line-height:1.75;font-weight:300}
+.section{padding:4.5rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-bottom:.75rem}
+.section-title{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:12px;padding:1.75rem}
+.card h3{font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:.6rem}
+.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
+.pkg-card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:14px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.pkg-card.featured{border-color:var(--sage);box-shadow:0 0 0 1px var(--sage)}
+.pkg-tag{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage)}
+.pkg-card h3{font-family:var(--fs);font-size:1.15rem;font-weight:700}
+.pkg-price{font-family:var(--fs);font-size:1.8rem;font-weight:700;color:var(--carbon)}
+.pkg-price span{font-size:.85rem;font-weight:400;color:var(--slate)}
+.pkg-card ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.pkg-card li{font-size:.83rem;color:var(--slate);padding-left:1.2rem;position:relative;line-height:1.5}
+.pkg-card li::before{content:"→";position:absolute;left:0;color:var(--sage);font-weight:700}
+.pkg-monthly{font-size:.8rem;color:var(--slate);background:var(--sage-dim);padding:.3rem .7rem;border-radius:4px;display:inline-block;margin-top:.25rem}
+.cta-section{background:var(--sage);padding:4rem 2rem;text-align:center}
+.cta-section h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--carbon);letter-spacing:-.6px;margin-bottom:.75rem}
+.cta-section p{color:rgba(15,20,25,.7);margin-bottom:2rem;font-size:.95rem}
+.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--carbon);color:var(--ivory);padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:600;font-size:.9rem;transition:all .2s}
+.btn-dark:hover{background:#1e2d38;transform:translateY(-1px)}
+.footer{background:var(--carbon);color:rgba(246,244,241,.5);padding:3rem 2rem 1.5rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.footer-brand p{font-size:.85rem;margin-top:.5rem;max-width:260px;line-height:1.6}
+.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
+.footer-col h4{color:var(--ivory);font-family:var(--fs);font-size:.82rem;font-weight:600;margin-bottom:.75rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{color:rgba(246,244,241,.45);text-decoration:none;font-size:.82rem;transition:color .2s}
+.footer-col a:hover{color:var(--ivory)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.footer-bottom span,.footer-bottom a{font-size:.75rem}
+.footer-bottom a{color:var(--sage);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo-link">
+    <svg width="32" height="32" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#F6F4F1"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#F6F4F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="logo-name">Decus</span>
+  </a>
+  <ul class="nav-list" id="nav-menu">
+    <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+    <li><a href="trading.html">Trading</a></li>
+    <li><a href="marketing.html">Marketing</a></li>
+    <li><a href="3d.html">3D Studio</a></li>
+    <li><a href="mailto:dvega@decus-studio.com" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-tag">Data &amp; Automation</span>
+    <h1>Convertimos procesos<br>dispersos en <em>sistemas claros</em>.</h1>
+    <p>Dashboards, automatización, CRM, hub operativo e inteligencia artificial personalizada — diseñados para que tu negocio entienda su propia operación.</p>
+  </div>
+</section>
+
+<section class="section" style="background:#f0eeeb">
+  <div class="section-inner">
+    <div class="section-label">Servicios</div>
+    <h2 class="section-title">¿Qué incluye?</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📊 Dashboards y Visualización</h3>
+        <p>Power BI, Google Looker Studio, Excel o Google Sheets. Indicadores clave visibles en tiempo real. Ventas, gastos, clientes, rentabilidad — todo en un solo lugar.</p>
+      </div>
+      <div class="card">
+        <h3>⚙️ Automatización de Procesos</h3>
+        <p>Registro automático de información, reportes programados, seguimiento de tareas, alertas internas, control de pagos y consolidación de datos entre herramientas.</p>
+      </div>
+      <div class="card">
+        <h3>🏢 Hub de Negocio</h3>
+        <p>Centro de control operativo, base de conocimiento, dashboard ejecutivo, sistema interno de seguimiento y repositorio seguro de información del negocio.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 IA Personalizada</h3>
+        <p>Asistente para consultar documentos internos, resumir información, analizar datos, generar reportes y dar apoyo en toma de decisiones — entrenado con tu negocio.</p>
+      </div>
+      <div class="card">
+        <h3>👥 CRM y Gestión de Clientes</h3>
+        <p>Sistema de seguimiento de clientes, historial de interacciones, control de oportunidades de venta, facturación y cuentas por cobrar en una sola base de datos.</p>
+      </div>
+      <div class="card">
+        <h3>📁 Limpieza y Consolidación de Datos</h3>
+        <p>Tomamos archivos dispersos, exportaciones de múltiples sistemas y registros manuales — los consolidamos, limpiamos y estructuramos para que sean útiles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Herramientas</div>
+    <h2 class="section-title">Tecnología que ya conocés</h2>
+    <p class="section-sub">No imponemos herramientas nuevas. Trabajamos con lo que ya usás o con lo que mejor se adapta a tu operación.</p>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;padding:1.25rem"><strong style="font-family:var(--fs)">Power BI</strong><br><small style="color:var(--slate)">Dashboards empresariales</small></div>
+      <div class="card" style="text-align:center;padding:1.25rem"><strong style="font-family:var(--fs)">Google Sheets</strong><br><small style="color:var(--slate)">Reportes colaborativos</small></div>
+      <div class="card" style="text-align:center;padding:1.25rem"><strong style="font-family:var(--fs)">Excel</strong><br><small style="color:var(--slate)">Análisis y modelos</small></div>
+      <div class="card" style="text-align:center;padding:1.25rem"><strong style="font-family:var(--fs)">Looker Studio</strong><br><small style="color:var(--slate)">Visualización web</small></div>
+      <div class="card" style="text-align:center;padding:1.25rem"><strong style="font-family:var(--fs)">Power Automate</strong><br><small style="color:var(--slate)">Automatización Microsoft</small></div>
+      <div class="card" style="text-align:center;padding:1.25rem"><strong style="font-family:var(--fs)">Notion / Obsidian</strong><br><small style="color:var(--slate)">Hub de conocimiento</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--carbon);color:var(--ivory)">
+  <div class="section-inner">
+    <div class="section-label" style="color:rgba(143,168,155,.7)">Paquetes</div>
+    <h2 class="section-title" style="color:var(--ivory)">Soluciones escalables</h2>
+    <p style="color:rgba(246,244,241,.55);margin-bottom:2.5rem;max-width:560px;font-size:.95rem">Precios referenciales. Pueden variar según alcance, herramientas y suscripciones externas requeridas.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem">
+      <div class="pkg-card" style="background:#1a2630;border-color:rgba(143,168,155,.2)">
+        <span class="pkg-tag">Paso 0</span>
+        <h3 style="color:var(--ivory)">Diagnóstico Decus</h3>
+        <div class="pkg-price" style="color:var(--sage)">$40 <span>pago único</span></div>
+        <ul>
+          <li style="color:rgba(246,244,241,.6)">Reunión de diagnóstico</li>
+          <li style="color:rgba(246,244,241,.6)">Revisión del flujo actual</li>
+          <li style="color:rgba(246,244,241,.6)">Mapa de oportunidades</li>
+          <li style="color:rgba(246,244,241,.6)">Recomendación de sistema</li>
+          <li style="color:rgba(246,244,241,.6)">Estimación de costos</li>
+        </ul>
+      </div>
+      <div class="pkg-card" style="background:#1a2630;border-color:rgba(143,168,155,.2)">
+        <span class="pkg-tag">Paquete 2</span>
+        <h3 style="color:var(--ivory)">Dashboard Inicial</h3>
+        <div class="pkg-price" style="color:var(--sage)">$120 <span>desarrollo</span></div>
+        <ul>
+          <li style="color:rgba(246,244,241,.6)">Dashboard básico personalizado</li>
+          <li style="color:rgba(246,244,241,.6)">KPIs principales del negocio</li>
+          <li style="color:rgba(246,244,241,.6)">Carga manual o semiautomática</li>
+          <li style="color:rgba(246,244,241,.6)">Diseño alineado a tu marca</li>
+          <li style="color:rgba(246,244,241,.6)">Sesión de capacitación</li>
+        </ul>
+        <span class="pkg-monthly">+ desde $25/mes mantenimiento</span>
+      </div>
+      <div class="pkg-card featured" style="background:#1a2630">
+        <span class="pkg-tag">Paquete 3 ⭐</span>
+        <h3 style="color:var(--ivory)">Sistema Operativo Base</h3>
+        <div class="pkg-price" style="color:var(--sage)">$300 <span>desarrollo</span></div>
+        <ul>
+          <li style="color:rgba(246,244,241,.6)">Base de datos operativa</li>
+          <li style="color:rgba(246,244,241,.6)">Dashboard principal</li>
+          <li style="color:rgba(246,244,241,.6)">Estructura para ventas y clientes</li>
+          <li style="color:rgba(246,244,241,.6)">Automatizaciones básicas</li>
+          <li style="color:rgba(246,244,241,.6)">Documentación y capacitación</li>
+        </ul>
+        <span class="pkg-monthly">+ desde $50/mes mantenimiento</span>
+      </div>
+      <div class="pkg-card" style="background:#1a2630;border-color:rgba(143,168,155,.2)">
+        <span class="pkg-tag">Paquete 4</span>
+        <h3 style="color:var(--ivory)">Sistema Integral</h3>
+        <div class="pkg-price" style="color:var(--sage)">$500 <span>desarrollo</span></div>
+        <ul>
+          <li style="color:rgba(246,244,241,.6)">Hub operativo personalizado</li>
+          <li style="color:rgba(246,244,241,.6)">Automatizaciones entre herramientas</li>
+          <li style="color:rgba(246,244,241,.6)">KPIs definidos y dashboard ejecutivo</li>
+          <li style="color:rgba(246,244,241,.6)">Documentación de procesos</li>
+          <li style="color:rgba(246,244,241,.6)">Convenio mensual</li>
+        </ul>
+        <span class="pkg-monthly">+ desde $100/mes mantenimiento</span>
+      </div>
+      <div class="pkg-card" style="background:#1a2630;border-color:rgba(143,168,155,.2)">
+        <span class="pkg-tag">Paquete 5</span>
+        <h3 style="color:var(--ivory)">Intelligence Hub</h3>
+        <div class="pkg-price" style="color:var(--sage)">$800 <span>desarrollo</span></div>
+        <ul>
+          <li style="color:rgba(246,244,241,.6)">IA personalizada del negocio</li>
+          <li style="color:rgba(246,244,241,.6)">Dashboards conectados</li>
+          <li style="color:rgba(246,244,241,.6)">Automatizaciones avanzadas</li>
+          <li style="color:rgba(246,244,241,.6)">Base de conocimiento interna</li>
+          <li style="color:rgba(246,244,241,.6)">Análisis de rentabilidad</li>
+        </ul>
+        <span class="pkg-monthly">+ desde $175/mes mantenimiento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>¿Listo para entender tu operación?</h2>
+  <p>Comenzá con un diagnóstico de $40 y descubrí qué sistema necesita tu negocio.</p>
+  <a href="mailto:dvega@decus-studio.com?subject=Diagnóstico Decus — Data %26 Automation" class="btn-dark">Agendar diagnóstico</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:8px">
+          <svg width="24" height="24" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#8FA89B"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#8FA89B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-family:var(--fs);font-weight:700;font-size:1.1rem;color:var(--ivory)">Decus</span>
+        </div>
+        <p>De datos a decisiones. Sistemas digitales para negocios que quieren operar con claridad.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Sistemas</h4>
+          <ul>
+            <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+            <li><a href="trading.html">Trading</a></li>
+            <li><a href="marketing.html">Marketing</a></li>
+            <li><a href="3d.html">3D Studio</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li>
+            <li><a href="https://wa.me/50670142201">+506 7014 2201</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Decus Studio. Todos los derechos reservados.</span>
+      <a href="index.html">← Inicio</a>
+    </div>
+  </div>
+</footer>
+<script>
+const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
+hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
+document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+</script>
+</body>
+</html>

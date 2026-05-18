@@ -1,0 +1,92 @@
+{
+  "products": [
+    {
+      "id": "prod_001",
+      "name": "Porta Tarjetas Empresarial",
+      "description": "Diseño elegante y profesional. Capacidad para 8 tarjetas. Impresión en PLA premium.",
+      "price": 12.00,
+      "currency": "USD",
+      "category": "oficina",
+      "image_url": "",
+      "available": true,
+      "featured": true,
+      "material": "PLA",
+      "color": "Negro / Blanco"
+    },
+    {
+      "id": "prod_002",
+      "name": "Organizador de Escritorio",
+      "description": "Compartimentos para lapiceros, tijeras, clips y accesorios. Modular y apilable.",
+      "price": 18.00,
+      "currency": "USD",
+      "category": "oficina",
+      "image_url": "",
+      "available": true,
+      "featured": false,
+      "material": "PLA+",
+      "color": "Gris Carbón"
+    },
+    {
+      "id": "prod_003",
+      "name": "Figura Decorativa Custom",
+      "description": "Diseño personalizado bajo pedido. Ideal para regalos corporativos o decoración.",
+      "price": 25.00,
+      "currency": "USD",
+      "category": "decoracion",
+      "image_url": "",
+      "available": true,
+      "featured": true,
+      "material": "PLA / Resina",
+      "color": "A elegir"
+    },
+    {
+      "id": "prod_004",
+      "name": "Soporte para Celular de Escritorio",
+      "description": "Ajustable para cualquier tamaño de teléfono. Antideslizante. Diseño minimalista.",
+      "price": 10.00,
+      "currency": "USD",
+      "category": "tecnologia",
+      "image_url": "",
+      "available": true,
+      "featured": false,
+      "material": "PETG",
+      "color": "Negro"
+    },
+    {
+      "id": "prod_005",
+      "name": "Logo 3D Corporativo",
+      "description": "Tu logo o marca en relieve 3D. Ideal para escritorios, recepciones o regalos premium.",
+      "price": 35.00,
+      "currency": "USD",
+      "category": "corporativo",
+      "image_url": "",
+      "available": true,
+      "featured": true,
+      "material": "PLA / Resina",
+      "color": "Personalizado"
+    },
+    {
+      "id": "prod_006",
+      "name": "Macetero Geométrico",
+      "description": "Diseño moderno con patrón geométrico. Para plantas pequeñas o suculentas. Drenaje incluido.",
+      "price": 14.00,
+      "currency": "USD",
+      "category": "decoracion",
+      "image_url": "",
+      "available": true,
+      "featured": false,
+      "material": "PLA",
+      "color": "Verde Salvia / Blanco"
+    }
+  ],
+  "categories": [
+    { "id": "todos", "label": "Todos" },
+    { "id": "oficina", "label": "Oficina" },
+    { "id": "decoracion", "label": "Decoración" },
+    { "id": "tecnologia", "label": "Tecnología" },
+    { "id": "corporativo", "label": "Corporativo" }
+  ],
+  "last_updated": "2026-05-18",
+  "contact": "dvega@decus-studio.com",
+  "whatsapp": "+50670142201"
+}

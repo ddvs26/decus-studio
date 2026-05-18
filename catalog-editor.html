@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decus 3D — Editor de Catálogo</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--red:#e05555;--green:#52c97a}
+body{font-family:"Inter",sans-serif;background:#f5f3f0;color:var(--carbon);min-height:100vh}
+.app-header{background:var(--carbon);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.app-header h1{font-family:"Sora",sans-serif;color:#fff;font-size:1.1rem;font-weight:700}
+.app-header small{color:rgba(255,255,255,.4);font-size:.75rem}
+.app-header .badge{background:rgba(143,168,155,.2);color:var(--sage);padding:.3rem .75rem;border-radius:99px;font-size:.72rem;font-weight:600;border:1px solid rgba(143,168,155,.3)}
+.main{max-width:1200px;margin:0 auto;padding:2rem}
+.toolbar{display:flex;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:.6rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;font-family:"Sora",sans-serif;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-primary{background:var(--carbon);color:#fff}
+.btn-primary:hover{background:#1e2d38}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#43b86a}
+.btn-sage{background:var(--sage);color:var(--carbon)}
+.btn-sage:hover{background:#a0b9ac}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#c04444}
+.btn-sm{padding:.35rem .75rem;font-size:.75rem}
+.separator{width:1px;height:32px;background:rgba(0,0,0,.12)}
+.stats{display:flex;gap:1.5rem;font-size:.82rem;color:var(--slate)}
+.stats strong{color:var(--carbon);font-weight:600}
+/* FORM */
+.form-panel{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:14px;padding:2rem;margin-bottom:2rem}
+.form-panel h2{font-family:"Sora",sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid rgba(0,0,0,.08)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.25rem}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-group label{font-size:.78rem;font-weight:600;color:var(--slate);letter-spacing:.3px}
+.form-group input,.form-group select,.form-group textarea{border:1px solid rgba(0,0,0,.15);border-radius:8px;padding:.55rem .85rem;font-size:.88rem;font-family:"Inter",sans-serif;transition:border .2s;background:#fafaf9}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--sage)}
+.form-group textarea{resize:vertical;min-height:80px}
+.toggle-row{display:flex;align-items:center;gap:.75rem;padding:.75rem 0}
+.toggle-row label{font-size:.85rem;font-weight:500}
+input[type=checkbox]{width:16px;height:16px;accent-color:var(--sage);cursor:pointer}
+/* PRODUCTS LIST */
+.products-panel{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:14px;overflow:hidden}
+.products-header{padding:1.25rem 2rem;border-bottom:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between}
+.products-header h2{font-family:"Sora",sans-serif;font-size:1rem;font-weight:700}
+.product-row{display:grid;grid-template-columns:auto 1fr 90px 80px 80px;gap:1rem;padding:1rem 2rem;border-bottom:1px solid rgba(0,0,0,.06);align-items:center;transition:background .15s}
+.product-row:hover{background:#fafaf9}
+.product-row:last-child{border-bottom:none}
+.product-row-thumb{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#e8e6e2,#d5d2cd);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.product-row-thumb img{width:100%;height:100%;object-fit:cover}
+.product-row-info h4{font-family:"Sora",sans-serif;font-size:.88rem;font-weight:600;margin-bottom:.15rem}
+.product-row-info small{font-size:.75rem;color:var(--slate)}
+.product-row-price{font-family:"Sora",sans-serif;font-size:.95rem;font-weight:700;text-align:right}
+.status-badge{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:.5px}
+.status-available{background:rgba(82,201,122,.15);color:#2da85a}
+.status-unavailable{background:rgba(224,85,85,.12);color:var(--red)}
+.row-actions{display:flex;gap:.4rem;justify-content:flex-end}
+.no-products{padding:3rem;text-align:center;color:var(--slate);font-size:.9rem}
+/* IMPORT/EXPORT */
+.io-panel{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:14px;padding:1.5rem 2rem;margin-bottom:2rem}
+.io-panel h2{font-family:"Sora",sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1rem;color:var(--slate)}
+.io-panel p{font-size:.82rem;color:var(--slate);line-height:1.6}
+.io-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+/* NOTIFICATION */
+.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--carbon);color:#fff;padding:.85rem 1.25rem;border-radius:10px;font-size:.85rem;font-family:"Sora",sans-serif;font-weight:600;z-index:1000;transform:translateY(100px);opacity:0;transition:all .3s;max-width:320px;line-height:1.4}
+.notif.show{transform:translateY(0);opacity:1}
+.notif.success{background:#2da85a}
+.notif.error{background:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div>
+    <h1>Decus 3D — Editor de Catálogo</h1>
+    <small>Herramienta local de administración</small>
+  </div>
+  <span class="badge">Solo uso local</span>
+</div>
+
+<div class="main">
+
+  <div class="io-panel">
+    <h2>📂 Importar / Exportar</h2>
+    <p>Para actualizar el catálogo en tu sitio web: editá los productos acá, exportá el JSON y subí el archivo <strong>catalog.json</strong> a tu repositorio de GitHub.</p>
+    <div class="io-actions">
+      <label class="btn btn-sage" style="cursor:pointer">
+        📁 Cargar catalog.json
+        <input type="file" id="import-file" accept=".json" style="display:none">
+      </label>
+      <button class="btn btn-success" onclick="exportCatalog()">⬇️ Exportar catalog.json</button>
+      <button class="btn btn-primary" onclick="loadSample()">▶ Cargar ejemplo</button>
+    </div>
+  </div>
+
+  <div class="form-panel">
+    <h2 id="form-title">➕ Agregar Nuevo Producto</h2>
+    <input type="hidden" id="edit-id">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nombre del producto *</label>
+        <input type="text" id="f-name" placeholder="Ej: Porta Tarjetas Empresarial">
+      </div>
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="f-category">
+          <option value="oficina">Oficina</option>
+          <option value="decoracion">Decoración</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="corporativo">Corporativo</option>
+          <option value="hogar">Hogar</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Precio (USD) *</label>
+        <input type="number" id="f-price" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Material</label>
+        <input type="text" id="f-material" placeholder="Ej: PLA, PETG, Resina">
+      </div>
+      <div class="form-group">
+        <label>Color</label>
+        <input type="text" id="f-color" placeholder="Ej: Negro / Blanco / A elegir">
+      </div>
+      <div class="form-group">
+        <label>URL de imagen (opcional)</label>
+        <input type="url" id="f-image" placeholder="https://...">
+      </div>
+    </div>
+    <div class="form-group" style="margin-bottom:1rem">
+      <label>Descripción *</label>
+      <textarea id="f-desc" placeholder="Describí el producto, características, usos..."></textarea>
+    </div>
+    <div style="display:flex;gap:2rem;margin-bottom:1.25rem">
+      <div class="toggle-row">
+        <input type="checkbox" id="f-available" checked>
+        <label for="f-available">Disponible para venta</label>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="f-featured">
+        <label for="f-featured">Producto destacado</label>
+      </div>
+    </div>
+    <div style="display:flex;gap:.75rem">
+      <button class="btn btn-primary" onclick="saveProduct()">💾 Guardar producto</button>
+      <button class="btn btn-sage" onclick="clearForm()">✕ Cancelar</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="stats">
+      <span>Total: <strong id="stat-total">0</strong></span>
+      <span>Disponibles: <strong id="stat-available">0</strong></span>
+      <span>Destacados: <strong id="stat-featured">0</strong></span>
+    </div>
+    <div class="separator"></div>
+    <a href="3d.html" target="_blank" class="btn btn-sage btn-sm">🔗 Ver sitio 3D</a>
+  </div>
+
+  <div class="products-panel">
+    <div class="products-header">
+      <h2>Productos en el catálogo</h2>
+    </div>
+    <div id="products-list"><div class="no-products">No hay productos. Cargá un catalog.json o agregá uno nuevo.</div></div>
+  </div>
+
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+let catalog = { products: [], categories: [
+  {id:"todos",label:"Todos"},{id:"oficina",label:"Oficina"},{id:"decoracion",label:"Decoración"},
+  {id:"tecnologia",label:"Tecnología"},{id:"corporativo",label:"Corporativo"},{id:"hogar",label:"Hogar"},{id:"otro",label:"Otro"}
+], last_updated: "", contact: "dvega@decus-studio.com", whatsapp: "+50670142201" };
+
+let editingId = null;
+
+function generateId() {
+  return "prod_" + Date.now().toString(36) + Math.random().toString(36).substr(2,4);
+}
+
+function notify(msg, type="success") {
+  const el = document.getElementById("notif");
+  el.textContent = msg;
+  el.className = "notif " + type + " show";
+  setTimeout(() => el.classList.remove("show"), 3000);
+}
+
+function saveProduct() {
+  const name = document.getElementById("f-name").value.trim();
+  const desc = document.getElementById("f-desc").value.trim();
+  const price = parseFloat(document.getElementById("f-price").value);
+  if (!name || !desc || isNaN(price)) { notify("Completá nombre, descripción y precio.", "error"); return; }
+  
+  const product = {
+    id: editingId || generateId(),
+    name, description: desc, price,
+    currency: "USD",
+    category: document.getElementById("f-category").value,
+    material: document.getElementById("f-material").value.trim(),
+    color: document.getElementById("f-color").value.trim(),
+    image_url: document.getElementById("f-image").value.trim(),
+    available: document.getElementById("f-available").checked,
+    featured: document.getElementById("f-featured").checked
+  };
+  
+  if (editingId) {
+    const idx = catalog.products.findIndex(p => p.id === editingId);
+    if (idx !== -1) catalog.products[idx] = product;
+    notify("Producto actualizado ✓");
+  } else {
+    catalog.products.push(product);
+    notify("Producto agregado ✓");
+  }
+  clearForm();
+  renderProducts();
+}
+
+function editProduct(id) {
+  const p = catalog.products.find(p => p.id === id);
+  if (!p) return;
+  editingId = id;
+  document.getElementById("edit-id").value = id;
+  document.getElementById("f-name").value = p.name;
+  document.getElementById("f-desc").value = p.description;
+  document.getElementById("f-price").value = p.price;
+  document.getElementById("f-category").value = p.category;
+  document.getElementById("f-material").value = p.material || "";
+  document.getElementById("f-color").value = p.color || "";
+  document.getElementById("f-image").value = p.image_url || "";
+  document.getElementById("f-available").checked = p.available;
+  document.getElementById("f-featured").checked = p.featured;
+  document.getElementById("form-title").textContent = "✏️ Editando: " + p.name;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteProduct(id) {
+  if (!confirm("¿Eliminás este producto del catálogo?")) return;
+  catalog.products = catalog.products.filter(p => p.id !== id);
+  notify("Producto eliminado.", "error");
+  renderProducts();
+}
+
+function clearForm() {
+  editingId = null;
+  ["f-name","f-desc","f-price","f-material","f-color","f-image"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("f-category").value = "oficina";
+  document.getElementById("f-available").checked = true;
+  document.getElementById("f-featured").checked = false;
+  document.getElementById("form-title").textContent = "➕ Agregar Nuevo Producto";
+}
+
+function renderProducts() {
+  const list = document.getElementById("products-list");
+  const products = catalog.products;
+  
+  document.getElementById("stat-total").textContent = products.length;
+  document.getElementById("stat-available").textContent = products.filter(p=>p.available).length;
+  document.getElementById("stat-featured").textContent = products.filter(p=>p.featured).length;
+  
+  if (products.length === 0) {
+    list.innerHTML = '<div class="no-products">No hay productos en el catálogo.</div>';
+    return;
+  }
+  list.innerHTML = products.map(p => `
+    <div class="product-row">
+      <div class="product-row-thumb">
+        ${p.image_url ? `<img src="${p.image_url}" alt="${p.name}">` : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'}
+      </div>
+      <div class="product-row-info">
+        <h4>${p.name} ${p.featured ? '⭐' : ""}</h4>
+        <small>${p.category} · ${p.material || "Sin material"} · ${p.color || ""}</small>
+      </div>
+      <div class="product-row-price">$${p.price.toFixed(2)}</div>
+      <div><span class="status-badge ${p.available ? "status-available" : "status-unavailable"}">${p.available ? "ACTIVO" : "INACTIVO"}</span></div>
+      <div class="row-actions">
+        <button class="btn btn-sage btn-sm" onclick="editProduct('${p.id}')">Editar</button>
+        <button class="btn btn-red btn-sm" onclick="deleteProduct('${p.id}')">✕</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function exportCatalog() {
+  catalog.last_updated = new Date().toISOString().split("T")[0];
+  const json = JSON.stringify(catalog, null, 2);
+  const blob = new Blob([json], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "catalog.json"; a.click();
+  URL.revokeObjectURL(url);
+  notify("catalog.json descargado. Subilo a GitHub ✓");
+}
+
+function loadSample() {
+  fetch("catalog.json")
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(data => { catalog = data; renderProducts(); notify("Catálogo cargado desde catalog.json ✓"); })
+    .catch(() => notify("No se encontró catalog.json. Usá el botón de importar.", "error"));
+}
+
+document.getElementById("import-file").addEventListener("change", function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      catalog = JSON.parse(e.target.result);
+      renderProducts();
+      notify("Catálogo importado: " + catalog.products.length + " productos ✓");
+    } catch { notify("Archivo JSON inválido.", "error"); }
+  };
+  reader.readAsText(file);
+  this.value = "";
+});
+
+renderProducts();
+</script>
+</body>
+</html>

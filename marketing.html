@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decus Marketing — Estrategia Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--sage-dim:rgba(143,168,155,.15);--fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);line-height:1.65;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--carbon);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-family:var(--fs);font-size:1.3rem;font-weight:700;color:var(--ivory);letter-spacing:-.5px}
+.nav-list{list-style:none;display:flex;align-items:center;gap:1.5rem}
+.nav-list a{color:rgba(246,244,241,.6);text-decoration:none;font-size:.83rem;transition:color .2s}
+.nav-list a:hover{color:var(--ivory)}
+.nav-cta{background:var(--sage)!important;color:var(--carbon)!important;padding:.45rem 1rem;border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important}
+.hamburger{display:none;background:none;border:none;color:var(--ivory);cursor:pointer;padding:.25rem}
+.hamburger svg{width:22px;height:22px}
+@media(max-width:768px){.nav-list{display:none;position:absolute;top:100%;left:0;right:0;background:var(--carbon);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem}.nav-list.open{display:flex}.hamburger{display:block}}
+.page-hero{background:var(--carbon);color:var(--ivory);padding:7rem 2rem 5rem;margin-top:60px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(45,110,110,.2) 0%,transparent 60%);pointer-events:none}
+.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.page-tag{display:inline-block;background:rgba(143,168,155,.15);color:var(--sage);padding:.3rem .9rem;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(143,168,155,.2);margin-bottom:1.5rem}
+.page-hero h1{font-family:var(--fs);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1rem}
+.page-hero h1 em{font-style:normal;color:var(--sage)}
+.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.65);max-width:600px;line-height:1.75;font-weight:300}
+.section{padding:4.5rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-bottom:.75rem}
+.section-title{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:12px;padding:1.75rem}
+.card h3{font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:.6rem}
+.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
+.cta-section{background:var(--sage);padding:4rem 2rem;text-align:center}
+.cta-section h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--carbon);letter-spacing:-.6px;margin-bottom:.75rem}
+.cta-section p{color:rgba(15,20,25,.7);margin-bottom:2rem;font-size:.95rem}
+.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--carbon);color:var(--ivory);padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:600;font-size:.9rem;transition:all .2s}
+.btn-dark:hover{background:#1e2d38;transform:translateY(-1px)}
+.footer{background:var(--carbon);color:rgba(246,244,241,.5);padding:3rem 2rem 1.5rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.footer-brand p{font-size:.85rem;margin-top:.5rem;max-width:260px;line-height:1.6}
+.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
+.footer-col h4{color:var(--ivory);font-family:var(--fs);font-size:.82rem;font-weight:600;margin-bottom:.75rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{color:rgba(246,244,241,.45);text-decoration:none;font-size:.82rem;transition:color .2s}
+.footer-col a:hover{color:var(--ivory)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.footer-bottom span,.footer-bottom a{font-size:.75rem}
+.footer-bottom a{color:var(--sage);text-decoration:none}
+</style>
+<style>
+.pkg-card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:14px;padding:2rem;display:flex;flex-direction:column;gap:.85rem}
+.pkg-card.featured{border-color:var(--sage);box-shadow:0 0 0 1px var(--sage)}
+.pkg-tag{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage)}
+.pkg-card h3{font-family:var(--fs);font-size:1.15rem;font-weight:700}
+.pkg-price{font-family:var(--fs);font-size:1.8rem;font-weight:700}
+.pkg-price span{font-size:.85rem;font-weight:400;color:var(--slate)}
+.pkg-card ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.pkg-card li{font-size:.83rem;color:var(--slate);padding-left:1.2rem;position:relative;line-height:1.5}
+.pkg-card li::before{content:"→";position:absolute;left:0;color:var(--sage);font-weight:700}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo-link">
+    <svg width="32" height="32" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#F6F4F1"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#F6F4F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="logo-name">Decus</span>
+  </a>
+  <ul class="nav-list" id="nav-menu">
+    <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+    <li><a href="trading.html">Trading</a></li>
+    <li><a href="marketing.html">Marketing</a></li>
+    <li><a href="3d.html">3D Studio</a></li>
+    <li><a href="mailto:dvega@decus-studio.com" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</nav>
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-tag">Decus Marketing</span>
+    <h1>Marketing digital<br>que <em>convierte y crece</em>.</h1>
+    <p>Estrategia de contenido, gestión de redes, campañas pagadas y análisis de resultados — todo conectado con los datos de tu negocio para tomar decisiones más inteligentes.</p>
+  </div>
+</section>
+<section class="section" style="background:#f0eeeb">
+  <div class="section-inner">
+    <div class="section-label">Servicios</div>
+    <h2 class="section-title">¿Qué incluye?</h2>
+    <div class="grid-2">
+      <div class="card"><h3>📱 Gestión de Redes Sociales</h3><p>Creación y publicación de contenido para Instagram, Facebook, LinkedIn y TikTok. Calendario editorial, diseño visual y copywriting alineado a tu marca.</p></div>
+      <div class="card"><h3>✍️ Estrategia de Contenido</h3><p>Definición de pilares de contenido, tono de comunicación, calendario mensual y flujo de aprobación. Contenido que educa, conecta y vende.</p></div>
+      <div class="card"><h3>🎯 Campañas Pagadas</h3><p>Diseño y gestión de campañas en Meta Ads y Google Ads. Segmentación, creatividades, A/B testing y optimización continua basada en datos.</p></div>
+      <div class="card"><h3>📊 Analítica y Reportes</h3><p>Dashboard de métricas de marketing conectado con datos del negocio. Alcance, engagement, conversiones, costo por resultado y ROI claro.</p></div>
+      <div class="card"><h3>🎨 Diseño de Marca</h3><p>Identidad visual, paleta de colores, tipografía, plantillas de contenido y guía de estilo. Consistencia visual en todos los puntos de contacto.</p></div>
+      <div class="card"><h3>🔗 Integración con Data</h3><p>El marketing conectado con los datos reales del negocio: qué campañas generan ventas reales, qué clientes vienen de qué canal, qué contenido convierte.</p></div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Paquetes</div>
+    <h2 class="section-title">Planes mensuales</h2>
+    <div class="grid-3">
+      <div class="pkg-card">
+        <span class="pkg-tag">Presencia</span>
+        <h3>Starter</h3>
+        <div class="pkg-price">$150 <span>/mes</span></div>
+        <ul>
+          <li>2 redes sociales</li>
+          <li>8–12 publicaciones/mes</li>
+          <li>Calendario editorial</li>
+          <li>Diseño de contenido básico</li>
+          <li>Reporte mensual</li>
+        </ul>
+      </div>
+      <div class="pkg-card featured">
+        <span class="pkg-tag">⭐ Crecimiento</span>
+        <h3>Standard</h3>
+        <div class="pkg-price">$280 <span>/mes</span></div>
+        <ul>
+          <li>3 redes sociales</li>
+          <li>16–20 publicaciones/mes</li>
+          <li>Stories y contenido dinámico</li>
+          <li>1 campaña pagada gestionada</li>
+          <li>Dashboard de métricas</li>
+          <li>Reunión mensual de revisión</li>
+        </ul>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-tag">Escala</span>
+        <h3>Pro</h3>
+        <div class="pkg-price">$450 <span>/mes</span></div>
+        <ul>
+          <li>4+ redes sociales</li>
+          <li>Contenido ilimitado</li>
+          <li>Campañas pagadas múltiples</li>
+          <li>Integración con CRM/ventas</li>
+          <li>Dashboard avanzado</li>
+          <li>Estrategia y consultoría continua</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.82rem;color:var(--slate)">* Los presupuestos de campañas pagadas (Meta Ads, Google Ads) son adicionales al costo de gestión.</p>
+  </div>
+</section>
+<section class="cta-section">
+  <h2>¿Querés que tu negocio crezca en digital?</h2>
+  <p>Hablemos de tu situación actual y definamos qué estrategia tiene más sentido para vos.</p>
+  <a href="mailto:dvega@decus-studio.com?subject=Decus Marketing — Consulta" class="btn-dark">Hablar de estrategia</a>
+</section>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:8px">
+          <svg width="24" height="24" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#8FA89B"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#8FA89B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-family:var(--fs);font-weight:700;font-size:1.1rem;color:var(--ivory)">Decus</span>
+        </div>
+        <p>De datos a decisiones.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Sistemas</h4><ul><li><a href="data-analytics.html">Data &amp; Automation</a></li><li><a href="trading.html">Trading</a></li><li><a href="marketing.html">Marketing</a></li><li><a href="3d.html">3D Studio</a></li></ul></div>
+        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li><li><a href="https://wa.me/50670142201">+506 7014 2201</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Decus Studio.</span>
+      <a href="index.html">← Inicio</a>
+    </div>
+  </div>
+</footer>
+<script>
+const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
+hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
+document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+</script>
+</body>
+</html>

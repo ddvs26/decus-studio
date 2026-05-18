@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decus 3D Studio — Impresión 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--sage-dim:rgba(143,168,155,.15);--fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);line-height:1.65;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--carbon);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-family:var(--fs);font-size:1.3rem;font-weight:700;color:var(--ivory);letter-spacing:-.5px}
+.nav-list{list-style:none;display:flex;align-items:center;gap:1.5rem}
+.nav-list a{color:rgba(246,244,241,.6);text-decoration:none;font-size:.83rem;transition:color .2s}
+.nav-list a:hover{color:var(--ivory)}
+.nav-cta{background:var(--sage)!important;color:var(--carbon)!important;padding:.45rem 1rem;border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important}
+.hamburger{display:none;background:none;border:none;color:var(--ivory);cursor:pointer;padding:.25rem}
+.hamburger svg{width:22px;height:22px}
+@media(max-width:768px){.nav-list{display:none;position:absolute;top:100%;left:0;right:0;background:var(--carbon);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem}.nav-list.open{display:flex}.hamburger{display:block}}
+.page-hero{background:var(--carbon);color:var(--ivory);padding:7rem 2rem 5rem;margin-top:60px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(45,110,110,.2) 0%,transparent 60%);pointer-events:none}
+.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.page-tag{display:inline-block;background:rgba(143,168,155,.15);color:var(--sage);padding:.3rem .9rem;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(143,168,155,.2);margin-bottom:1.5rem}
+.page-hero h1{font-family:var(--fs);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1rem}
+.page-hero h1 em{font-style:normal;color:var(--sage)}
+.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.65);max-width:600px;line-height:1.75;font-weight:300}
+.section{padding:4.5rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-bottom:.75rem}
+.section-title{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:12px;padding:1.75rem}
+.card h3{font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:.6rem}
+.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
+.cta-section{background:var(--sage);padding:4rem 2rem;text-align:center}
+.cta-section h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--carbon);letter-spacing:-.6px;margin-bottom:.75rem}
+.cta-section p{color:rgba(15,20,25,.7);margin-bottom:2rem;font-size:.95rem}
+.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--carbon);color:var(--ivory);padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:600;font-size:.9rem;transition:all .2s}
+.btn-dark:hover{background:#1e2d38;transform:translateY(-1px)}
+.footer{background:var(--carbon);color:rgba(246,244,241,.5);padding:3rem 2rem 1.5rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.footer-brand p{font-size:.85rem;margin-top:.5rem;max-width:260px;line-height:1.6}
+.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
+.footer-col h4{color:var(--ivory);font-family:var(--fs);font-size:.82rem;font-weight:600;margin-bottom:.75rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{color:rgba(246,244,241,.45);text-decoration:none;font-size:.82rem;transition:color .2s}
+.footer-col a:hover{color:var(--ivory)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.footer-bottom span,.footer-bottom a{font-size:.75rem}
+.footer-bottom a{color:var(--sage);text-decoration:none}
+</style>
+<style>
+/* CATALOG */
+.catalog-filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{background:#fff;border:1px solid rgba(74,90,102,.2);color:var(--slate);padding:.4rem .9rem;border-radius:99px;font-size:.8rem;font-family:var(--fb);cursor:pointer;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--carbon);color:var(--ivory);border-color:var(--carbon)}
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+.product-card{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:14px;overflow:hidden;transition:all .2s;display:flex;flex-direction:column}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,20,25,.09);border-color:rgba(143,168,155,.3)}
+.product-img{background:linear-gradient(135deg,#e8e6e2 0%,#d8d5d0 100%);height:180px;display:flex;align-items:center;justify-content:center;position:relative}
+.product-img svg{width:56px;height:56px;color:var(--slate);opacity:.35}
+.product-img img{width:100%;height:100%;object-fit:cover}
+.product-featured{position:absolute;top:.6rem;right:.6rem;background:var(--sage);color:var(--carbon);font-size:.65rem;font-weight:700;padding:.2rem .6rem;border-radius:99px;letter-spacing:.5px}
+.product-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.5rem}
+.product-category{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage)}
+.product-name{font-family:var(--fs);font-size:1rem;font-weight:700;line-height:1.25}
+.product-desc{font-size:.82rem;color:var(--slate);line-height:1.55;flex:1}
+.product-meta{display:flex;gap:.5rem;flex-wrap:wrap}
+.meta-tag{font-size:.7rem;background:rgba(74,90,102,.08);color:var(--slate);padding:.2rem .5rem;border-radius:4px}
+.product-footer{padding:.75rem 1.25rem;border-top:1px solid rgba(74,90,102,.08);display:flex;align-items:center;justify-content:space-between}
+.product-price{font-family:var(--fs);font-size:1.15rem;font-weight:700}
+.product-price span{font-size:.7rem;font-weight:400;color:var(--slate)}
+.btn-order{background:var(--carbon);color:var(--ivory);padding:.4rem .85rem;border-radius:6px;text-decoration:none;font-size:.78rem;font-weight:600;font-family:var(--fs);transition:background .2s}
+.btn-order:hover{background:#1e2d38}
+.unavailable{opacity:.55}
+.unavailable .btn-order{background:var(--slate);cursor:not-allowed}
+.catalog-empty{text-align:center;padding:4rem 2rem;color:var(--slate)}.catalog-empty svg{width:48px;height:48px;opacity:.3;margin-bottom:1rem}
+#catalog-status{text-align:center;padding:3rem;color:var(--slate);font-size:.9rem}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo-link">
+    <svg width="32" height="32" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#F6F4F1"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#F6F4F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="logo-name">Decus</span>
+  </a>
+  <ul class="nav-list" id="nav-menu">
+    <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+    <li><a href="trading.html">Trading</a></li>
+    <li><a href="marketing.html">Marketing</a></li>
+    <li><a href="3d.html">3D Studio</a></li>
+    <li><a href="mailto:dvega@decus-studio.com" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-tag">Decus 3D Studio</span>
+    <h1>Diseño e <em>impresión 3D</em><br>para tu negocio y tu espacio.</h1>
+    <p>Accesorios de oficina, figuras decorativas, piezas corporativas personalizadas y prototipos — diseñados e impresos con materiales de alta calidad.</p>
+  </div>
+</section>
+
+<section class="section" style="background:#f0eeeb">
+  <div class="section-inner">
+    <div class="section-label">Servicios</div>
+    <h2 class="section-title">¿Qué hacemos?</h2>
+    <div class="grid-3">
+      <div class="card"><h3>🖨️ Impresión bajo pedido</h3><p>Imprimimos tus diseños o los creamos desde cero. PLA, PETG, resina. Alta resolución y acabados de calidad.</p></div>
+      <div class="card"><h3>🏢 Piezas corporativas</h3><p>Logos en 3D, letreros, trofeos, regalos empresariales y accesorios de marca para oficinas o eventos.</p></div>
+      <div class="card"><h3>🎨 Diseño personalizado</h3><p>Si tenés una idea, la convertimos en un archivo 3D y la imprimimos. Diseño incluido para pedidos a medida.</p></div>
+      <div class="card"><h3>⚙️ Prototipos</h3><p>Piezas funcionales, prototipos de productos o componentes de repuesto. Ideal para emprendedores en fase de prueba.</p></div>
+      <div class="card"><h3>🎁 Regalos especiales</h3><p>Figuras decorativas, miniaturas, accesorios únicos. Perfecto para cumpleaños, bodas, eventos o regalos corporativos.</p></div>
+      <div class="card"><h3>📐 Diseño 3D</h3><p>Modelado 3D desde cero usando tus referencias, fotografías o bocetos. Te entregamos el archivo y la pieza impresa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Catálogo</div>
+    <h2 class="section-title">Productos disponibles</h2>
+    <p class="section-sub">Productos en inventario. También hacemos pedidos personalizados — consultá por WhatsApp o email.</p>
+    <div class="catalog-filters" id="catalog-filters">
+      <button class="filter-btn active" data-cat="todos">Todos</button>
+    </div>
+    <div id="catalog-status">Cargando catálogo...</div>
+    <div class="catalog-grid" id="catalog-grid" style="display:none"></div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--carbon);color:var(--ivory)">
+  <div class="section-inner">
+    <div class="section-label" style="color:rgba(143,168,155,.7)">Proceso</div>
+    <h2 class="section-title" style="color:var(--ivory)">¿Cómo pedís?</h2>
+    <div class="grid-3" style="margin-top:2rem">
+      <div style="border-left:2px solid var(--sage);padding-left:1.25rem">
+        <div style="font-family:var(--fs);font-size:2rem;font-weight:700;color:rgba(143,168,155,.3);margin-bottom:.5rem">01</div>
+        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Elegís el producto</h3>
+        <p style="font-size:.83rem;color:rgba(246,244,241,.5)">Del catálogo o describís lo que necesitás — personalizaciones, colores y materiales.</p>
+      </div>
+      <div style="border-left:2px solid var(--sage);padding-left:1.25rem">
+        <div style="font-family:var(--fs);font-size:2rem;font-weight:700;color:rgba(143,168,155,.3);margin-bottom:.5rem">02</div>
+        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Confirmamos el pedido</h3>
+        <p style="font-size:.83rem;color:rgba(246,244,241,.5)">Te cotizamos, confirmamos materiales, tiempo de entrega y adelanto requerido.</p>
+      </div>
+      <div style="border-left:2px solid var(--sage);padding-left:1.25rem">
+        <div style="font-family:var(--fs);font-size:2rem;font-weight:700;color:rgba(143,168,155,.3);margin-bottom:.5rem">03</div>
+        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Impresión y entrega</h3>
+        <p style="font-size:.83rem;color:rgba(246,244,241,.5)">Producción en 3–7 días hábiles según complejidad. Entrega o retiro disponible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>¿Tenés un diseño en mente?</h2>
+  <p>Escribinos con tu idea y te cotizamos sin costo. Pedidos personalizados bienvenidos.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="https://wa.me/50670142201?text=Hola%2C%20me%20interesa%20un%20pedido%20de%20impresión%203D" class="btn-dark">WhatsApp</a>
+    <a href="mailto:dvega@decus-studio.com?subject=Decus 3D — Pedido personalizado" class="btn-dark" style="background:#2A7A7A">Email</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:8px">
+          <svg width="24" height="24" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#8FA89B"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#8FA89B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-family:var(--fs);font-weight:700;font-size:1.1rem;color:var(--ivory)">Decus</span>
+        </div>
+        <p>De datos a decisiones.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Sistemas</h4><ul><li><a href="data-analytics.html">Data &amp; Automation</a></li><li><a href="trading.html">Trading</a></li><li><a href="marketing.html">Marketing</a></li><li><a href="3d.html">3D Studio</a></li></ul></div>
+        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li><li><a href="https://wa.me/50670142201">+506 7014 2201</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Decus Studio.</span>
+      <a href="index.html">← Inicio</a>
+    </div>
+  </div>
+</footer>
+<script>
+const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
+hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
+document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+</script>
+
+<script>
+let allProducts = [];
+let activeCategory = "todos";
+
+async function loadCatalog() {
+  try {
+    const res = await fetch("catalog.json");
+    if (!res.ok) throw new Error("No se pudo cargar el catálogo");
+    const data = await res.json();
+    allProducts = data.products || [];
+    const categories = data.categories || [];
+    
+    // Build filter buttons
+    const filtersEl = document.getElementById("catalog-filters");
+    filtersEl.innerHTML = "";
+    categories.forEach(cat => {
+      const btn = document.createElement("button");
+      btn.className = "filter-btn" + (cat.id === "todos" ? " active" : "");
+      btn.dataset.cat = cat.id;
+      btn.textContent = cat.label;
+      btn.addEventListener("click", () => {
+        activeCategory = cat.id;
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProducts();
+      });
+      filtersEl.appendChild(btn);
+    });
+    
+    document.getElementById("catalog-status").style.display = "none";
+    document.getElementById("catalog-grid").style.display = "grid";
+    renderProducts();
+  } catch(e) {
+    document.getElementById("catalog-status").innerHTML = 
+      "<p>No se pudo cargar el catálogo. <a href=\"mailto:dvega@decus-studio.com\">Consultá directamente.</a></p>";
+  }
+}
+
+function renderProducts() {
+  const grid = document.getElementById("catalog-grid");
+  const filtered = activeCategory === "todos" 
+    ? allProducts 
+    : allProducts.filter(p => p.category === activeCategory);
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="catalog-empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"/></svg><p>No hay productos en esta categoría aún.</p></div>`;
+    return;
+  }
+  
+  grid.innerHTML = filtered.map(p => {
+    const orderUrl = p.available
+      ? `https://wa.me/50670142201?text=Hola%2C%20me%20interesa%20el%20producto%3A%20${encodeURIComponent(p.name)}%20(%24${p.price}%20${p.currency})`
+      : "#";
+    const imgContent = p.image_url
+      ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
+    
+    return `
+    <div class="product-card${p.available ? "" : " unavailable"}">
+      <div class="product-img">
+        ${imgContent}
+        ${p.featured ? '<span class="product-featured">Destacado</span>' : ""}
+      </div>
+      <div class="product-body">
+        <span class="product-category">${p.category}</span>
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-desc">${p.description}</p>
+        <div class="product-meta">
+          ${p.material ? `<span class="meta-tag">Material: ${p.material}</span>` : ""}
+          ${p.color ? `<span class="meta-tag">Color: ${p.color}</span>` : ""}
+          ${!p.available ? '<span class="meta-tag" style="color:#c0392b">No disponible</span>' : ""}
+        </div>
+      </div>
+      <div class="product-footer">
+        <div class="product-price">${p.price.toFixed(2)} <span>${p.currency}</span></div>
+        <a href="${orderUrl}" class="btn-order"${!p.available ? ' style="pointer-events:none"' : ""} ${p.available ? 'target="_blank"' : ""}>
+          ${p.available ? "Pedir →" : "Agotado"}
+        </a>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+loadCatalog();
+
+// Nav hamburger
+const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
+hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
+document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+</script>
+</body>
+</html>

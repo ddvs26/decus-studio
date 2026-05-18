@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decus Trading — Sistema Algorítmico</title>
+<meta name="description" content="Trading algorítmico 24/7 en criptomonedas. IA analítica, gestión de riesgo automatizada, operación continua en Azure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--gold:#C8922A;--gold-dim:rgba(200,146,42,.12);--sage-dim:rgba(143,168,155,.15);--fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--carbon);color:var(--ivory);line-height:1.65;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,20,25,.95);backdrop-filter:blur(12px);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-family:var(--fs);font-size:1.3rem;font-weight:700;color:var(--ivory);letter-spacing:-.5px}
+.nav-list{list-style:none;display:flex;align-items:center;gap:1.5rem}
+.nav-list a{color:rgba(246,244,241,.55);text-decoration:none;font-size:.83rem;transition:color .2s}
+.nav-list a:hover{color:var(--ivory)}
+.nav-cta{background:var(--sage)!important;color:var(--carbon)!important;padding:.45rem 1rem;border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important}
+.hamburger{display:none;background:none;border:none;color:var(--ivory);cursor:pointer;padding:.25rem}
+.hamburger svg{width:22px;height:22px}
+@media(max-width:768px){.nav-list{display:none;position:absolute;top:100%;left:0;right:0;background:var(--carbon);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem;border-top:1px solid rgba(255,255,255,.08)}.nav-list.open{display:flex}.hamburger{display:block}}
+
+/* TICKER */
+.ticker{background:#111d25;padding:.55rem 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);margin-top:60px}
+.ticker-track{display:flex;gap:3rem;animation:ticker 30s linear infinite;white-space:nowrap}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-family:var(--fs);font-size:.72rem;font-weight:600;letter-spacing:1px;color:rgba(143,168,155,.7);flex-shrink:0}
+
+/* HERO */
+.hero{padding:4rem 2rem 5rem;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;top:-20%;left:-10%;width:60%;height:150%;background:radial-gradient(ellipse,rgba(200,146,42,.08) 0%,transparent 60%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-10%;right:-10%;width:50%;height:120%;background:radial-gradient(ellipse,rgba(45,110,110,.12) 0%,transparent 60%);pointer-events:none}
+.hero-inner{max-width:820px;margin:0 auto;position:relative;z-index:1}
+.page-tag{display:inline-block;background:var(--gold-dim);color:var(--gold);padding:.3rem .9rem;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(200,146,42,.2);margin-bottom:1.5rem}
+.hero h1{font-family:var(--fs);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:1.05rem;color:rgba(246,244,241,.6);max-width:580px;margin:0 auto 2.5rem;line-height:1.75;font-weight:300}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;padding:.85rem 1.8rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:600;font-size:.9rem;transition:all .2s}
+.btn-gold:hover{background:#d4a040;transform:translateY(-1px)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(246,244,241,.2);color:var(--ivory);padding:.85rem 1.8rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:500;font-size:.9rem;transition:all .2s}
+.btn-outline:hover{border-color:rgba(246,244,241,.45)}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;max-width:900px;margin:0 auto}
+.metric{background:#0d1720;padding:1.75rem 1.5rem;text-align:center}
+.metric-val{font-family:var(--fs);font-size:2rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.35rem}
+.metric-label{font-size:.75rem;color:rgba(246,244,241,.45);letter-spacing:.5px}
+
+/* SECTIONS */
+.section{padding:4.5rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(143,168,155,.6);margin-bottom:.75rem}
+.section-title{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:.95rem;color:rgba(246,244,241,.5);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
+.card{background:#111d25;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1.75rem}
+.card h3{font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:.6rem;color:var(--ivory)}
+.card p{font-size:.85rem;color:rgba(246,244,241,.5);line-height:1.65}
+.gold-text{color:var(--gold)}
+
+/* PERFORMANCE TABLE */
+.perf-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.perf-table th{text-align:left;font-family:var(--fs);font-size:.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(143,168,155,.6);padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.perf-table td{padding:.85rem 1rem;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(246,244,241,.75)}
+.perf-table tr:last-child td{border-bottom:none}
+.badge-green{color:#52c97a;font-weight:600}
+.badge-red{color:#e05555;font-weight:600}
+.badge-yellow{color:var(--gold);font-weight:600}
+
+/* INVESTMENT */
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:2rem}
+.inv-card{background:#111d25;border:1px solid rgba(200,146,42,.15);border-radius:14px;padding:2rem;display:flex;flex-direction:column;gap:.75rem}
+.inv-card.featured{border-color:var(--gold);box-shadow:0 0 0 1px rgba(200,146,42,.3)}
+.inv-tier{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.inv-amount{font-family:var(--fs);font-size:1.8rem;font-weight:700;color:var(--ivory)}
+.inv-card ul{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-top:.25rem}
+.inv-card li{font-size:.82rem;color:rgba(246,244,241,.55);padding-left:1.1rem;position:relative}
+.inv-card li::before{content:"→";position:absolute;left:0;color:var(--gold)}
+
+/* RISK */
+.risk-box{background:#1a0f0f;border:1px solid rgba(224,85,85,.25);border-radius:12px;padding:2rem;margin-top:2rem}
+.risk-box h3{color:#e05555;font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:1rem}
+.risk-box p{font-size:.85rem;color:rgba(246,244,241,.55);line-height:1.7}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,#1a2630 0%,#111d25 100%);border-top:1px solid rgba(200,146,42,.2);padding:4.5rem 2rem;text-align:center}
+.cta-section h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.6px;margin-bottom:.75rem}
+.cta-section p{color:rgba(246,244,241,.5);margin-bottom:2rem;font-size:.95rem}
+
+/* FOOTER */
+.footer{background:#080f14;color:rgba(246,244,241,.4);padding:3rem 2rem 1.5rem;border-top:1px solid rgba(255,255,255,.05)}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.footer-brand p{font-size:.85rem;margin-top:.5rem;max-width:260px;line-height:1.6}
+.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
+.footer-col h4{color:var(--ivory);font-family:var(--fs);font-size:.82rem;font-weight:600;margin-bottom:.75rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{color:rgba(246,244,241,.35);text-decoration:none;font-size:.82rem;transition:color .2s}
+.footer-col a:hover{color:var(--ivory)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.footer-bottom span,.footer-bottom a{font-size:.75rem}
+.footer-bottom a{color:var(--sage);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo-link">
+    <svg width="32" height="32" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#F6F4F1"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#F6F4F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="logo-name">Decus</span>
+  </a>
+  <ul class="nav-list" id="nav-menu">
+    <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+    <li><a href="trading.html">Trading</a></li>
+    <li><a href="marketing.html">Marketing</a></li>
+    <li><a href="3d.html">3D Studio</a></li>
+    <li><a href="mailto:dvega@decus-studio.com" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</nav>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">BTC/USD · MARGIN 2x</span>
+    <span class="ticker-item">ETH/USD · MARGIN 2x</span>
+    <span class="ticker-item">SOL/USD · MARGIN 2x</span>
+    <span class="ticker-item">LARGO &amp; CORTO HABILITADO</span>
+    <span class="ticker-item">SL + TP OBLIGATORIOS</span>
+    <span class="ticker-item">CLAUDE AI ANALÍTICO</span>
+    <span class="ticker-item">24/7 AZURE CLOUD</span>
+    <span class="ticker-item">R:R MÍN 1:2</span>
+    <span class="ticker-item">BTC/USD · MARGIN 2x</span>
+    <span class="ticker-item">ETH/USD · MARGIN 2x</span>
+    <span class="ticker-item">SOL/USD · MARGIN 2x</span>
+    <span class="ticker-item">LARGO &amp; CORTO HABILITADO</span>
+    <span class="ticker-item">SL + TP OBLIGATORIOS</span>
+    <span class="ticker-item">CLAUDE AI ANALÍTICO</span>
+    <span class="ticker-item">24/7 AZURE CLOUD</span>
+    <span class="ticker-item">R:R MÍN 1:2</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="page-tag">Decus Trading</span>
+    <h1>Trading algorítmico<br>con <em>inteligencia artificial</em>.</h1>
+    <p>Sistema de trading automatizado en criptomonedas. Opera 24/7, gestiona el riesgo automáticamente y toma decisiones basadas en análisis técnico y confirmación con IA.</p>
+    <div class="hero-btns">
+      <a href="#inversiones" class="btn-gold">Ver oportunidades de inversión</a>
+      <a href="mailto:dvega@decus-studio.com?subject=Decus Trading — Consulta" class="btn-outline">Consultar</a>
+    </div>
+    <div style="margin-top:3rem">
+      <div class="metrics">
+        <div class="metric"><div class="metric-val">24/7</div><div class="metric-label">Operación continua</div></div>
+        <div class="metric"><div class="metric-val">2x</div><div class="metric-label">Margen máximo</div></div>
+        <div class="metric"><div class="metric-val">1:2</div><div class="metric-label">R:R mínimo</div></div>
+        <div class="metric"><div class="metric-val">3</div><div class="metric-label">Pares activos</div></div>
+        <div class="metric"><div class="metric-val">AI</div><div class="metric-label">Análisis Claude</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Sistema</div>
+    <h2 class="section-title">Cómo opera el bot</h2>
+    <p class="section-sub">Combina análisis técnico multicapa con confirmación de IA para operar con disciplina, sin emociones.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🎯 Análisis Técnico Multicapa</h3>
+        <p>EMA 20/50, RSI, MACD, Bandas de Bollinger, ATR y patrones de velas. El bot solo opera cuando múltiples indicadores confirman el setup. Sin señales aisladas.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 Confirmación con Claude AI</h3>
+        <p>Antes de ejecutar, el sistema consulta a Claude AI con el contexto técnico completo. La IA valida o rechaza el trade. Un segundo par de ojos automático.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Gestión de Riesgo Automática</h3>
+        <p>Stop loss y take profit calculados por ATR en cada trade. Máximo 2% del capital por operación. Margen 2x. R:R mínimo 1:2 antes de entrar.</p>
+      </div>
+      <div class="card">
+        <h3>☁️ Infraestructura Azure 24/7</h3>
+        <p>El bot corre en servidores Azure de manera continua. No depende de que una computadora esté encendida. Conexión directa con el exchange vía API.</p>
+      </div>
+      <div class="card">
+        <h3>📊 Dashboard de Monitoreo</h3>
+        <p>Panel de control en tiempo real con historial de trades, P&amp;L acumulado, win rate, métricas de riesgo y alertas automáticas por cambios en el mercado.</p>
+      </div>
+      <div class="card">
+        <h3>📈 Pares Operados</h3>
+        <p>BTC/USD, ETH/USD y SOL/USD con margen 2x. Habilitado para largos y cortos. Se puede ampliar a otros pares según condiciones del mercado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#0d1720">
+  <div class="section-inner">
+    <div class="section-label">Rendimiento esperado</div>
+    <h2 class="section-title">Análisis financiero</h2>
+    <p class="section-sub">Proyecciones basadas en backtesting histórico. El rendimiento pasado no garantiza resultados futuros. Todos los datos son estimados.</p>
+    <table class="perf-table">
+      <thead>
+        <tr>
+          <th>Escenario</th>
+          <th>Win Rate</th>
+          <th>Retorno Mensual Est.</th>
+          <th>Retorno Anual Est.</th>
+          <th>Max Drawdown</th>
+          <th>Perfil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Conservador</td>
+          <td>48%</td>
+          <td class="badge-green">+3% – +5%</td>
+          <td class="badge-green">+36% – +60%</td>
+          <td class="badge-red">–15%</td>
+          <td>Mercado lateral, pocas señales</td>
+        </tr>
+        <tr>
+          <td>Moderado</td>
+          <td>55%</td>
+          <td class="badge-green">+6% – +10%</td>
+          <td class="badge-green">+72% – +120%</td>
+          <td class="badge-yellow">–20%</td>
+          <td>Mercado con tendencia definida</td>
+        </tr>
+        <tr>
+          <td>Optimista</td>
+          <td>62%</td>
+          <td class="badge-green">+10% – +18%</td>
+          <td class="badge-green">+120% – +216%</td>
+          <td class="badge-red">–25%</td>
+          <td>Mercado trending con alta volatilidad</td>
+        </tr>
+        <tr>
+          <td>Adverso</td>
+          <td>40%</td>
+          <td class="badge-red">–5% – –2%</td>
+          <td class="badge-red">–24% – –60%</td>
+          <td class="badge-red">–35%</td>
+          <td>Mercado altamente volátil o lateral</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="risk-box" style="margin-top:2rem">
+      <h3>⚠️ Advertencia de riesgo</h3>
+      <p>El trading de criptomonedas con margen implica riesgo sustancial de pérdida. Es posible perder todo el capital invertido. Los mercados de cripto son altamente volátiles. Las proyecciones anteriores son estimaciones basadas en backtesting y condiciones históricas — no garantizan rendimiento futuro. Solo invertí capital que podés permitirte perder.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="inversiones">
+  <div class="section-inner">
+    <div class="section-label">Inversión</div>
+    <h2 class="section-title">Niveles de participación</h2>
+    <p class="section-sub">El sistema opera con capital propio y acepta participación limitada de inversores calificados bajo acuerdo formal.</p>
+    <div class="inv-grid">
+      <div class="inv-card">
+        <span class="inv-tier">Nivel Básico</span>
+        <div class="inv-amount">$500</div>
+        <p style="font-size:.8rem;color:rgba(246,244,241,.4)">Mínimo de participación</p>
+        <ul>
+          <li>Acceso a reportes mensuales</li>
+          <li>Dashboard de monitoreo</li>
+          <li>Retiro mensual disponible</li>
+          <li>Acuerdo formal firmado</li>
+        </ul>
+      </div>
+      <div class="inv-card featured">
+        <span class="inv-tier">⭐ Nivel Estándar</span>
+        <div class="inv-amount">$2,000</div>
+        <p style="font-size:.8rem;color:rgba(246,244,241,.4)">Participación recomendada</p>
+        <ul>
+          <li>Reportes semanales detallados</li>
+          <li>Dashboard en tiempo real</li>
+          <li>Retiro flexible</li>
+          <li>Reunión mensual de revisión</li>
+          <li>Acuerdo formal con KPIs</li>
+        </ul>
+      </div>
+      <div class="inv-card">
+        <span class="inv-tier">Nivel Avanzado</span>
+        <div class="inv-amount">$5,000+</div>
+        <p style="font-size:.8rem;color:rgba(246,244,241,.4)">Participación preferencial</p>
+        <ul>
+          <li>Reportes personalizados</li>
+          <li>Acceso directo al sistema</li>
+          <li>Términos negociables</li>
+          <li>Revisiones de estrategia</li>
+          <li>Condiciones preferenciales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>¿Interesado en participar?</h2>
+  <p>El acceso está limitado. Escribinos para conocer disponibilidad y términos del acuerdo.</p>
+  <a href="mailto:dvega@decus-studio.com?subject=Decus Trading — Inversión" class="btn-gold">Consultar disponibilidad</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:8px">
+          <svg width="24" height="24" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#8FA89B"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#8FA89B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-family:var(--fs);font-weight:700;font-size:1.1rem;color:var(--ivory)">Decus</span>
+        </div>
+        <p>De datos a decisiones. Sistemas digitales para negocios que quieren operar con claridad.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Sistemas</h4><ul><li><a href="data-analytics.html">Data &amp; Automation</a></li><li><a href="trading.html">Trading</a></li><li><a href="marketing.html">Marketing</a></li><li><a href="3d.html">3D Studio</a></li></ul></div>
+        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li><li><a href="https://wa.me/50670142201">+506 7014 2201</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Decus Studio. Todos los derechos reservados.</span>
+      <a href="index.html">← Inicio</a>
+    </div>
+  </div>
+</footer>
+<script>
+const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
+hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
+document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+</script>
+</body>
+</html>
