@@ -1,133 +1,291 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Decus Marketing — Estrategia Digital</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Digital — Decus</title>
+<meta name="description" content="Estrategia de contenido, campañas pagadas, gestión de redes y analítica de resultados para negocios locales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--sage-dim:rgba(143,168,155,.15);--fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);line-height:1.65;overflow-x:hidden}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--carbon);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
-.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-name{font-family:var(--fs);font-size:1.3rem;font-weight:700;color:var(--ivory);letter-spacing:-.5px}
-.nav-list{list-style:none;display:flex;align-items:center;gap:1.5rem}
-.nav-list a{color:rgba(246,244,241,.6);text-decoration:none;font-size:.83rem;transition:color .2s}
-.nav-list a:hover{color:var(--ivory)}
-.nav-cta{background:var(--sage)!important;color:var(--carbon)!important;padding:.45rem 1rem;border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important}
-.hamburger{display:none;background:none;border:none;color:var(--ivory);cursor:pointer;padding:.25rem}
-.hamburger svg{width:22px;height:22px}
-@media(max-width:768px){.nav-list{display:none;position:absolute;top:100%;left:0;right:0;background:var(--carbon);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem}.nav-list.open{display:flex}.hamburger{display:block}}
-.page-hero{background:var(--carbon);color:var(--ivory);padding:7rem 2rem 5rem;margin-top:60px;position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(45,110,110,.2) 0%,transparent 60%);pointer-events:none}
-.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
-.page-tag{display:inline-block;background:rgba(143,168,155,.15);color:var(--sage);padding:.3rem .9rem;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(143,168,155,.2);margin-bottom:1.5rem}
-.page-hero h1{font-family:var(--fs);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1rem}
-.page-hero h1 em{font-style:normal;color:var(--sage)}
-.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.65);max-width:600px;line-height:1.75;font-weight:300}
-.section{padding:4.5rem 2rem}
-.section-inner{max-width:1100px;margin:0 auto}
-.section-label{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-bottom:.75rem}
-.section-title{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:1rem}
-.section-sub{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-.card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:12px;padding:1.75rem}
-.card h3{font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:.6rem}
-.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
-.cta-section{background:var(--sage);padding:4rem 2rem;text-align:center}
-.cta-section h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--carbon);letter-spacing:-.6px;margin-bottom:.75rem}
-.cta-section p{color:rgba(15,20,25,.7);margin-bottom:2rem;font-size:.95rem}
-.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--carbon);color:var(--ivory);padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:600;font-size:.9rem;transition:all .2s}
-.btn-dark:hover{background:#1e2d38;transform:translateY(-1px)}
-.footer{background:var(--carbon);color:rgba(246,244,241,.5);padding:3rem 2rem 1.5rem}
-.footer-inner{max-width:1100px;margin:0 auto}
-.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.footer-brand p{font-size:.85rem;margin-top:.5rem;max-width:260px;line-height:1.6}
-.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
-.footer-col h4{color:var(--ivory);font-family:var(--fs);font-size:.82rem;font-weight:600;margin-bottom:.75rem}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.footer-col a{color:rgba(246,244,241,.45);text-decoration:none;font-size:.82rem;transition:color .2s}
+
+/* ── RESET & TOKENS ──────────────────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
+:root {
+  --carbon:  #0F1419;
+  --slate:   #4A5A66;
+  --sage:    #8FA89B;
+  --ivory:   #F6F4F1;
+  --sage-10: rgba(143,168,155,.10);
+  --sage-20: rgba(143,168,155,.20);
+  --fs: "Sora",    system-ui, sans-serif;
+  --fb: "Inter",   system-ui, sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+html { scroll-behavior: smooth }
+body { font-family: var(--fb); background: var(--ivory); color: var(--carbon);
+       line-height: 1.65; overflow-x: hidden }
+
+/* ── CURSOR ──────────────────────────────────────────────────────────── */
+.cursor { position:fixed; width:10px; height:10px; background:var(--sage);
+  border-radius:50%; pointer-events:none; z-index:9999; mix-blend-mode:difference;
+  transform:translate(-50%,-50%); transition:transform .15s var(--ease),
+  width .3s var(--ease), height .3s var(--ease); will-change:left,top }
+.cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid rgba(143,168,155,.5);
+  border-radius:50%; pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%); transition:left .12s var(--ease), top .12s var(--ease),
+  width .3s, height .3s, border-color .3s; will-change:left,top }
+body:has(a:hover) .cursor, body:has(button:hover) .cursor { width:20px; height:20px }
+@media(hover:none) { .cursor, .cursor-ring { display:none } }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────────── */
+.section-tag { display:inline-block; font-size:.68rem; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase; color:var(--sage);
+  margin-bottom:.75rem; font-family:var(--fs) }
+.section-title { font-family:var(--fs); font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700; letter-spacing:-1px; line-height:1.12; margin-bottom:1rem }
+.section-sub { font-size:1rem; color:var(--slate); max-width:540px;
+  line-height:1.75; margin-bottom:3rem }
+
+/* ── LAYOUT ──────────────────────────────────────────────────────────── */
+.section { padding: 6rem 2.5rem }
+.section-inner { max-width:1100px; margin:0 auto }
+.hidden { display:none !important }
+
+/* ── REVEAL ANIMATIONS ───────────────────────────────────────────────── */
+.reveal { opacity:0; transform:translateY(28px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease) }
+.reveal.visible { opacity:1; transform:translateY(0) }
+.reveal-delay-1 { transition-delay:.1s }
+.reveal-delay-2 { transition-delay:.2s }
+.reveal-delay-3 { transition-delay:.3s }
+.reveal-delay-4 { transition-delay:.4s }
+
+/* ── BUTTONS ─────────────────────────────────────────────────────────── */
+.btn { display:inline-flex; align-items:center; gap:.65rem; padding:.9rem 2rem;
+  border-radius:8px; font-family:var(--fs); font-weight:600; font-size:.9rem;
+  text-decoration:none; cursor:pointer; border:none; transition:all .2s var(--ease) }
+.btn-primary { background:var(--carbon); color:var(--ivory) }
+.btn-primary:hover { background:#1e2d38; transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(15,20,25,.2) }
+.btn-sage { background:var(--sage); color:var(--carbon) }
+.btn-sage:hover { background:#a0b9ac; transform:translateY(-2px) }
+.btn-ghost { border:1px solid rgba(246,244,241,.25); color:var(--ivory) }
+.btn-ghost:hover { border-color:rgba(246,244,241,.5); background:rgba(246,244,241,.06) }
+.btn svg { width:16px; height:16px; transition:transform .2s }
+.btn:hover svg { transform:translateX(3px) }
+
+/* ── CARDS ───────────────────────────────────────────────────────────── */
+.card-grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.5rem }
+.card-grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem }
+.card-grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.25rem }
+
+/* ── NAV ─────────────────────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.1rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  transition:background .3s,backdrop-filter .3s,box-shadow .3s;
+  background:transparent}
+.nav.scrolled{background:rgba(15,20,25,.92);backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ivory)}
+.logo-mark{width:28px;height:34px;--bg-logo:#0F1419}
+.nav-wordmark{font-family:var(--fs);font-size:1.25rem;font-weight:700;letter-spacing:-.5px;color:var(--ivory)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:1.75rem}
+.nav-item{color:rgba(246,244,241,.55);text-decoration:none;font-size:.83rem;
+  font-family:var(--fb);transition:color .2s;letter-spacing:.1px}
+.nav-item:hover{color:var(--ivory)}
+.nav-cta{background:var(--sage);color:var(--carbon)!important;padding:.5rem 1.1rem;
+  border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important;
+  text-decoration:none;transition:background .2s,transform .15s}
+.nav-cta:hover{background:#a0b9ac;transform:translateY(-1px)}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;
+  flex-direction:column;gap:5px}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ivory);
+  border-radius:2px;transition:all .3s}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:820px){
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+    background:var(--carbon);flex-direction:column;justify-content:center;
+    align-items:center;gap:2rem;z-index:190}
+  .nav-links.open{display:flex}
+  .nav-item{font-size:1.1rem}
+  .nav-burger{display:flex}
+  .nav{padding:1rem 1.5rem}
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────── */
+.footer{background:var(--carbon);padding:4rem 2.5rem 2rem;margin-top:0}
+.footer-grid{max-width:1100px;margin:0 auto;display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .logo-mark{width:32px;height:38px;margin-bottom:.75rem}
+.footer-tagline{font-family:var(--fs);font-size:1.1rem;font-weight:600;
+  color:var(--ivory);margin-bottom:.5rem}
+.footer-sub{font-size:.83rem;color:rgba(246,244,241,.4);line-height:1.7}
+.footer-col h4{font-family:var(--fs);font-size:.75rem;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;color:rgba(246,244,241,.4);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.footer-col a{color:rgba(246,244,241,.55);text-decoration:none;font-size:.85rem;transition:color .2s}
 .footer-col a:hover{color:var(--ivory)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
-.footer-bottom span,.footer-bottom a{font-size:.75rem}
-.footer-bottom a{color:var(--sage);text-decoration:none}
-</style>
-<style>
-.pkg-card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:14px;padding:2rem;display:flex;flex-direction:column;gap:.85rem}
+.footer-bottom{max-width:1100px;margin:0 auto;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:.5rem}
+.footer-bottom span{font-size:.75rem;color:rgba(246,244,241,.3)}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr;gap:2rem}}
+
+/* ── CONTACT ─────────────────────────────────────────────────────────── */
+.contact-section{background:#f0eeeb}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;
+  max-width:1100px;margin:0 auto}
+.contact-info h2{font-family:var(--fs);font-size:clamp(1.6rem,2.8vw,2.2rem);
+  font-weight:700;letter-spacing:-.8px;line-height:1.2;margin-bottom:1rem}
+.contact-info p{font-size:.92rem;color:var(--slate);line-height:1.75;margin-bottom:2rem}
+.contact-details{display:flex;flex-direction:column;gap:1rem}
+.contact-link{display:flex;align-items:center;gap:.75rem;text-decoration:none;
+  color:var(--carbon);font-size:.9rem;font-weight:500;transition:color .2s}
+.contact-link:hover{color:var(--sage)}
+.contact-link svg{width:18px;height:18px;color:var(--sage);flex-shrink:0}
+.contact-form{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:16px;padding:2.5rem;
+  box-shadow:0 4px 24px rgba(15,20,25,.06)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-group:last-of-type{margin-bottom:1.5rem}
+.form-group label{font-size:.75rem;font-weight:600;color:var(--slate);letter-spacing:.3px}
+.form-group input,.form-group select,.form-group textarea{
+  border:1px solid rgba(74,90,102,.18);border-radius:8px;padding:.65rem 1rem;
+  font-size:.88rem;font-family:var(--fb);background:#fafaf9;
+  transition:border .2s,box-shadow .2s;color:var(--carbon)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(143,168,155,.15)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-submit{width:100%;background:var(--carbon);color:var(--ivory);border:none;
+  padding:1rem 1.5rem;border-radius:8px;font-family:var(--fs);font-weight:600;font-size:.92rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.75rem;
+  transition:background .2s,transform .15s;margin-bottom:.75rem}
+.form-submit:hover{background:#1e2d38;transform:translateY(-1px)}
+.form-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-arrow{transition:transform .2s}
+.form-submit:not(:disabled):hover .btn-arrow{transform:translateX(4px)}
+.form-note{font-size:.75rem;color:var(--slate);text-align:center;opacity:.8}
+.form-success{display:flex!important;align-items:center;gap:.75rem;
+  background:rgba(82,201,122,.1);border:1px solid rgba(82,201,122,.3);
+  border-radius:8px;padding:1rem;margin-top:1rem;font-size:.88rem;color:#2a7a48}
+.form-success svg{width:20px;height:20px;flex-shrink:0}
+@media(max-width:768px){
+  .contact-wrap{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+
+.page-hero{background:var(--carbon);color:var(--ivory);padding:9rem 2.5rem 6rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,#8FA89B1a 0%,transparent 55%);pointer-events:none}
+.page-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px}
+.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.page-tag-badge{display:inline-block;background:#8FA89B18;color:#8FA89B;border:1px solid #8FA89B30;padding:.35rem 1rem;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;font-family:var(--fs);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .15s forwards}
+.page-hero h1{font-family:var(--fs);font-size:clamp(2.2rem,5vw,4rem);font-weight:700;line-height:1.08;letter-spacing:-2px;margin-bottom:1.25rem;opacity:0;animation:fadeUp .9s .3s forwards}
+.page-hero h1 em{font-style:normal;color:#8FA89B}
+.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.6);max-width:580px;line-height:1.8;font-weight:300;opacity:0;animation:fadeUp .9s .45s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.section{padding:5.5rem 2.5rem}.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--sage);margin-bottom:.75rem;font-family:var(--fs)}
+.section-title{font-family:var(--fs);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-1px;line-height:1.12;margin-bottom:1rem}
+.section-sub{font-size:.95rem;color:var(--slate);max-width:540px;line-height:1.75;margin-bottom:3rem}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.card{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:14px;padding:2rem;transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,20,25,.09);border-color:rgba(143,168,155,.3)}
+.card h3{font-family:var(--fs);font-size:1rem;font-weight:700;margin-bottom:.6rem}
+.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.pkg-card{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:14px;padding:2rem;display:flex;flex-direction:column;gap:.85rem;transition:transform .3s,box-shadow .3s}
+.pkg-card:hover{transform:translateY(-4px)}
 .pkg-card.featured{border-color:var(--sage);box-shadow:0 0 0 1px var(--sage)}
-.pkg-tag{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage)}
-.pkg-card h3{font-family:var(--fs);font-size:1.15rem;font-weight:700}
-.pkg-price{font-family:var(--fs);font-size:1.8rem;font-weight:700}
-.pkg-price span{font-size:.85rem;font-weight:400;color:var(--slate)}
+.pkg-tag{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sage)}
+.pkg-card h3{font-family:var(--fs);font-size:1.1rem;font-weight:700}
+.pkg-price{font-family:var(--fs);font-size:2rem;font-weight:700}
+.pkg-price small{font-size:.82rem;font-weight:400;color:var(--slate)}
 .pkg-card ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
-.pkg-card li{font-size:.83rem;color:var(--slate);padding-left:1.2rem;position:relative;line-height:1.5}
+.pkg-card li{font-size:.82rem;color:var(--slate);padding-left:1.2rem;position:relative;line-height:1.55}
 .pkg-card li::before{content:"→";position:absolute;left:0;color:var(--sage);font-weight:700}
+.pkg-monthly{font-size:.78rem;background:var(--sage-10);color:var(--slate);padding:.3rem .7rem;border-radius:4px;display:inline-block;margin-top:.25rem}
+.dark-section{background:var(--carbon);color:var(--ivory)}
+.dark-section .section-tag{color:rgba(143,168,155,.7)}
+.dark-section .section-title{color:var(--ivory)}
+.dark-section .section-sub{color:rgba(246,244,241,.5)}
+.cta-strip{background:var(--sage);padding:5rem 2.5rem;text-align:center}
+.cta-strip h2{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.6px;color:var(--carbon);margin-bottom:.75rem}
+.cta-strip p{color:rgba(15,20,25,.65);margin-bottom:2rem;font-size:.95rem;max-width:500px;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
-<nav class="nav">
-  <a href="index.html" class="logo-link">
-    <svg width="32" height="32" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#F6F4F1"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#F6F4F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="logo-name">Decus</span>
+<div class="cursor"></div><div class="cursor-ring"></div>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">
+    <svg class="logo-mark" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 4L5 44L22 44C34.5 44 39 34.5 39 24C39 13.5 34.5 4 22 4Z" fill="currentColor"/>
+  <path d="M11 11L22 11C30 11 32 16 32 24C32 32 30 37 22 37L11 37Z" fill="var(--bg-logo,#0F1419)"/>
+  <path d="M15 17L24.5 24L15 31" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+    <span class="nav-wordmark">Decus</span>
   </a>
-  <ul class="nav-list" id="nav-menu">
-    <li><a href="data-analytics.html">Data &amp; Automation</a></li>
-    <li><a href="trading.html">Trading</a></li>
-    <li><a href="marketing.html">Marketing</a></li>
-    <li><a href="3d.html">3D Studio</a></li>
-    <li><a href="mailto:dvega@decus-studio.com" class="nav-cta">Contacto</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="data-analytics.html" class="nav-item">Data & Automation</a></li>
+    <li><a href="trading.html" class="nav-item">Trading</a></li>
+    <li><a href="marketing.html" class="nav-item">Marketing</a></li>
+    <li><a href="3d.html" class="nav-item">3D Studio</a></li>
+    <li><a href="#contact" class="nav-cta" data-track="nav_cta_click">Agendar diagnóstico</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
   </button>
 </nav>
+<div style="height:60px"></div>
 <section class="page-hero">
+  <div class="page-hero-grid"></div>
   <div class="page-hero-inner">
-    <span class="page-tag">Decus Marketing</span>
-    <h1>Marketing digital<br>que <em>convierte y crece</em>.</h1>
-    <p>Estrategia de contenido, gestión de redes, campañas pagadas y análisis de resultados — todo conectado con los datos de tu negocio para tomar decisiones más inteligentes.</p>
+    <span class="page-tag-badge">Decus Marketing</span>
+    <h1>Marketing digital que<br><em>conecta y convierte</em>.</h1>
+    <p>Estrategia de contenido, gestión de redes, campañas pagadas y analítica de resultados — todo conectado con los datos reales de tu negocio para tomar decisiones más inteligentes.</p>
   </div>
 </section>
+
 <section class="section" style="background:#f0eeeb">
   <div class="section-inner">
-    <div class="section-label">Servicios</div>
-    <h2 class="section-title">¿Qué incluye?</h2>
-    <div class="grid-2">
-      <div class="card"><h3>📱 Gestión de Redes Sociales</h3><p>Creación y publicación de contenido para Instagram, Facebook, LinkedIn y TikTok. Calendario editorial, diseño visual y copywriting alineado a tu marca.</p></div>
-      <div class="card"><h3>✍️ Estrategia de Contenido</h3><p>Definición de pilares de contenido, tono de comunicación, calendario mensual y flujo de aprobación. Contenido que educa, conecta y vende.</p></div>
-      <div class="card"><h3>🎯 Campañas Pagadas</h3><p>Diseño y gestión de campañas en Meta Ads y Google Ads. Segmentación, creatividades, A/B testing y optimización continua basada en datos.</p></div>
-      <div class="card"><h3>📊 Analítica y Reportes</h3><p>Dashboard de métricas de marketing conectado con datos del negocio. Alcance, engagement, conversiones, costo por resultado y ROI claro.</p></div>
-      <div class="card"><h3>🎨 Diseño de Marca</h3><p>Identidad visual, paleta de colores, tipografía, plantillas de contenido y guía de estilo. Consistencia visual en todos los puntos de contacto.</p></div>
-      <div class="card"><h3>🔗 Integración con Data</h3><p>El marketing conectado con los datos reales del negocio: qué campañas generan ventas reales, qué clientes vienen de qué canal, qué contenido convierte.</p></div>
+    <span class="section-tag reveal">Servicios</span>
+    <h2 class="section-title reveal reveal-delay-1">Marketing que conecta<br>con datos que deciden.</h2>
+    <div class="grid-2" style="margin-top:2.5rem">
+      <div class="card reveal"><h3>📱 Gestión de Redes Sociales</h3><p>Creación y publicación de contenido para Instagram, Facebook, LinkedIn y TikTok. Calendario editorial, diseño visual y copywriting alineado a tu marca y audiencia.</p></div>
+      <div class="card reveal reveal-delay-1"><h3>✍️ Estrategia de Contenido</h3><p>Definición de pilares de contenido, tono de voz, calendario mensual y flujo de aprobación. Contenido que educa, conecta y vende — no solo que se ve bien.</p></div>
+      <div class="card reveal reveal-delay-2"><h3>🎯 Campañas Pagadas</h3><p>Diseño y gestión de campañas en Meta Ads y Google Ads. Segmentación precisa, creatividades, A/B testing y optimización continua basada en datos reales.</p></div>
+      <div class="card reveal reveal-delay-3"><h3>📊 Analítica y Reportes</h3><p>Dashboard de métricas conectado con datos del negocio. Alcance, engagement, conversiones, costo por resultado y ROI claro — no números vacíos.</p></div>
+      <div class="card reveal"><h3>🎨 Identidad de Marca</h3><p>Paleta de colores, tipografía, plantillas de contenido y guía de estilo. Consistencia visual en todos los puntos de contacto con tus clientes.</p></div>
+      <div class="card reveal reveal-delay-1"><h3>🔗 Integración con Data</h3><p>El marketing conectado con los datos reales: qué campañas generan ventas reales, qué clientes vienen de qué canal, qué contenido convierte — no qué tiene más likes.</p></div>
     </div>
   </div>
 </section>
+
 <section class="section">
   <div class="section-inner">
-    <div class="section-label">Paquetes</div>
-    <h2 class="section-title">Planes mensuales</h2>
-    <div class="grid-3">
-      <div class="pkg-card">
+    <span class="section-tag reveal">Planes</span>
+    <h2 class="section-title reveal reveal-delay-1">Planes mensuales</h2>
+    <p class="section-sub reveal reveal-delay-2">Presupuestos de pauta (Meta Ads, Google Ads) son adicionales al costo de gestión.</p>
+    <div class="pkg-grid">
+      <div class="pkg-card reveal">
         <span class="pkg-tag">Presencia</span>
         <h3>Starter</h3>
-        <div class="pkg-price">$150 <span>/mes</span></div>
+        <div class="pkg-price">$150 <small>/mes</small></div>
         <ul>
-          <li>2 redes sociales</li>
+          <li>2 redes sociales activas</li>
           <li>8–12 publicaciones/mes</li>
           <li>Calendario editorial</li>
-          <li>Diseño de contenido básico</li>
+          <li>Diseño de contenido</li>
           <li>Reporte mensual</li>
         </ul>
       </div>
-      <div class="pkg-card featured">
+      <div class="pkg-card featured reveal reveal-delay-1">
         <span class="pkg-tag">⭐ Crecimiento</span>
         <h3>Standard</h3>
-        <div class="pkg-price">$280 <span>/mes</span></div>
+        <div class="pkg-price">$280 <small>/mes</small></div>
         <ul>
           <li>3 redes sociales</li>
           <li>16–20 publicaciones/mes</li>
@@ -137,53 +295,264 @@ body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);line-heig
           <li>Reunión mensual de revisión</li>
         </ul>
       </div>
-      <div class="pkg-card">
+      <div class="pkg-card reveal reveal-delay-2">
         <span class="pkg-tag">Escala</span>
         <h3>Pro</h3>
-        <div class="pkg-price">$450 <span>/mes</span></div>
+        <div class="pkg-price">$450 <small>/mes</small></div>
         <ul>
           <li>4+ redes sociales</li>
-          <li>Contenido ilimitado</li>
-          <li>Campañas pagadas múltiples</li>
+          <li>Contenido sin límite fijo</li>
+          <li>Múltiples campañas pagadas</li>
           <li>Integración con CRM/ventas</li>
           <li>Dashboard avanzado</li>
           <li>Estrategia y consultoría continua</li>
         </ul>
       </div>
     </div>
-    <p style="margin-top:1.5rem;font-size:.82rem;color:var(--slate)">* Los presupuestos de campañas pagadas (Meta Ads, Google Ads) son adicionales al costo de gestión.</p>
   </div>
 </section>
-<section class="cta-section">
-  <h2>¿Querés que tu negocio crezca en digital?</h2>
-  <p>Hablemos de tu situación actual y definamos qué estrategia tiene más sentido para vos.</p>
-  <a href="mailto:dvega@decus-studio.com?subject=Decus Marketing — Consulta" class="btn-dark">Hablar de estrategia</a>
+
+<div class="cta-strip">
+  <h2 class="reveal">¿Querés que tu negocio crezca en digital?</h2>
+  <p class="reveal reveal-delay-1">Hablemos de tu situación actual y definamos qué estrategia tiene más sentido para tu negocio y tu presupuesto.</p>
+  <a href="#contact" class="btn btn-primary reveal reveal-delay-2" data-track="marketing_cta">Hablar de estrategia →</a>
+</div>
+
+
+<!-- ── CONTACT FORM ───────────────────────────────────────────────────── -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <span class="section-tag">Contacto</span>
+        <h2 class="contact-title">Transformemos tu información<br>en un sistema de decisión.</h2>
+        <p>Agendá un diagnóstico inicial — $40, una sola reunión, entendés exactamente qué necesita tu negocio.</p>
+        <div class="contact-details">
+          <a href="mailto:dvega@decus-studio.com" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            dvega@decus-studio.com
+          </a>
+          <a href="https://wa.me/50670142201" target="_blank" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +506 7014 2201
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" id="lead-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre *</label>
+            <input type="text" id="f-name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" id="f-email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="f-phone" placeholder="+506 ...">
+          </div>
+          <div class="form-group">
+            <label>Empresa / Negocio</label>
+            <input type="text" id="f-company" placeholder="Nombre del negocio">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>¿Qué sistema te interesa?</label>
+          <select id="f-service">
+            <option value="">Seleccioná una opción</option>
+            <option value="diagnostico">Diagnóstico Decus ($40)</option>
+            <option value="data-analytics">Data & Automation</option>
+            <option value="trading">Trading Algorítmico</option>
+            <option value="marketing" selected>Marketing Digital</option>
+            <option value="3d">3D Studio</option>
+            <option value="integral">Sistema Integral</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea id="f-message" placeholder="Contame brevemente tu situación actual..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-track="lead_form_submit">
+          <span class="btn-text">Enviar mensaje</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-loading hidden">Enviando...</span>
+        </button>
+        <p class="form-note">Respondemos en menos de 24 horas hábiles.</p>
+        <div class="form-success hidden" id="form-success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10.01-3-3"/></svg>
+          <strong>¡Mensaje enviado!</strong> Te contactamos pronto.
+        </div>
+      </form>
+    </div>
+  </div>
 </section>
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:8px">
-          <svg width="24" height="24" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#8FA89B"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#8FA89B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span style="font-family:var(--fs);font-weight:700;font-size:1.1rem;color:var(--ivory)">Decus</span>
-        </div>
-        <p>De datos a decisiones.</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col"><h4>Sistemas</h4><ul><li><a href="data-analytics.html">Data &amp; Automation</a></li><li><a href="trading.html">Trading</a></li><li><a href="marketing.html">Marketing</a></li><li><a href="3d.html">3D Studio</a></li></ul></div>
-        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li><li><a href="https://wa.me/50670142201">+506 7014 2201</a></li></ul></div>
-      </div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <svg class="logo-mark" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 4L5 44L22 44C34.5 44 39 34.5 39 24C39 13.5 34.5 4 22 4Z" fill="#8FA89B"/>
+  <path d="M11 11L22 11C30 11 32 16 32 24C32 32 30 37 22 37L11 37Z" fill="#0F1419"/>
+  <path d="M15 17L24.5 24L15 31" stroke="#8FA89B" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+      <p class="footer-tagline">De datos a decisiones.</p>
+      <p class="footer-sub">Sistemas digitales para negocios<br>que quieren operar con claridad.</p>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Decus Studio.</span>
-      <a href="index.html">← Inicio</a>
+    <div class="footer-col">
+      <h4>Sistemas</h4>
+      <ul>
+        <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+        <li><a href="trading.html">Trading Algorítmico</a></li>
+        <li><a href="marketing.html">Marketing Digital</a></li>
+        <li><a href="3d.html">3D Studio</a></li>
+      </ul>
     </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li>
+        <li><a href="https://wa.me/50670142201" target="_blank">+506 7014 2201</a></li>
+        <li><a href="https://decus-studio.com">decus-studio.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Decus Studio · Daniel Vega S. — GMBA</span>
+    <span>Hecho con precisión en Costa Rica</span>
   </div>
 </footer>
 <script>
-const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
-hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
-document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+// Nav burger
+const burger = document.getElementById("nav-burger");
+const links  = document.getElementById("nav-links");
+if (burger) burger.addEventListener("click", () => {
+  burger.classList.toggle("open");
+  links.classList.toggle("open");
+});
+// Nav scroll effect
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 60);
+}, { passive: true });
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.querySelector(a.getAttribute("href"));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: "smooth" }); }
+  });
+});
 </script>
-</body>
-</html>
+
+<script>
+// ── Custom cursor ─────────────────────────────────────────────────────────
+(function(){
+  const cur  = document.createElement("div"); cur.className  = "cursor";
+  const ring = document.createElement("div"); ring.className = "cursor-ring";
+  document.body.append(cur, ring);
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener("mousemove", e=>{
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx+"px"; cur.style.top=my+"px";
+  }, {passive:true});
+  (function tick(){
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left=rx+"px"; ring.style.top=ry+"px";
+    requestAnimationFrame(tick);
+  })();
+})();
+
+// ── Scroll reveal ─────────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold:.12 });
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+// ── Number counter animation ──────────────────────────────────────────────
+function animateNum(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || "";
+  const dur = 1800;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now-start)/dur,1);
+    const ease = 1-Math.pow(1-p,3);
+    const val = target < 10 ? (target*ease).toFixed(1) : Math.round(target*ease);
+    el.textContent = val + suffix;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const numObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ animateNum(e.target); numObs.unobserve(e.target); } });
+},{threshold:.5});
+document.querySelectorAll(".count-up").forEach(el=>numObs.observe(el));
+</script>
+
+<script src="tracking.js"></script>
+
+<script>
+// ── Lead Form Handler ─────────────────────────────────────────────────────
+const API_URL = "https://api.decus-studio.com";
+
+document.getElementById("lead-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const btn   = this.querySelector(".form-submit");
+  const btext = btn.querySelector(".btn-text");
+  const barr  = btn.querySelector(".btn-arrow");
+  const bload = btn.querySelector(".btn-loading");
+  const succ  = document.getElementById("form-success");
+
+  const name  = document.getElementById("f-name").value.trim();
+  const email = document.getElementById("f-email").value.trim();
+  if (!name || !email) {
+    alert("Por favor completá nombre y email.");
+    return;
+  }
+
+  btn.disabled = true;
+  btext.classList.add("hidden");
+  barr.classList.add("hidden");
+  bload.classList.remove("hidden");
+
+  const utm = window.decusUTM ? window.decusUTM() : {};
+
+  try {
+    const res = await fetch(API_URL + "/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        phone:       document.getElementById("f-phone").value.trim(),
+        company:     document.getElementById("f-company").value.trim(),
+        service:     document.getElementById("f-service").value,
+        message:     document.getElementById("f-message").value.trim(),
+        source_page: window.location.pathname,
+        ...utm
+      })
+    });
+    if (res.ok) {
+      this.style.display = "none";
+      succ.classList.remove("hidden");
+      if (window.decusTrack) window.decusTrack("lead_submitted", { service: document.getElementById("f-service").value });
+    } else {
+      throw new Error("API error " + res.status);
+    }
+  } catch(err) {
+    // Fallback: open email client
+    const mailBody = encodeURIComponent(
+      `Nombre: ${name}\nEmail: ${email}\nMensaje: ${document.getElementById("f-message").value}`
+    );
+    window.location.href = `mailto:dvega@decus-studio.com?subject=Contacto Decus&body=${mailBody}`;
+  } finally {
+    btn.disabled = false;
+    btext.classList.remove("hidden");
+    barr.classList.remove("hidden");
+    bload.classList.add("hidden");
+  }
+});
+</script>
+
+</body></html>

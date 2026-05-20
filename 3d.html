@@ -1,295 +1,633 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Decus 3D Studio — Impresión 3D</title>
+<meta name="description" content="Diseño e impresión 3D: accesorios de oficina, piezas corporativas, figuras decorativas y prototipos a medida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--sage-dim:rgba(143,168,155,.15);--fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);line-height:1.65;overflow-x:hidden}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--carbon);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
-.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-name{font-family:var(--fs);font-size:1.3rem;font-weight:700;color:var(--ivory);letter-spacing:-.5px}
-.nav-list{list-style:none;display:flex;align-items:center;gap:1.5rem}
-.nav-list a{color:rgba(246,244,241,.6);text-decoration:none;font-size:.83rem;transition:color .2s}
-.nav-list a:hover{color:var(--ivory)}
-.nav-cta{background:var(--sage)!important;color:var(--carbon)!important;padding:.45rem 1rem;border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important}
-.hamburger{display:none;background:none;border:none;color:var(--ivory);cursor:pointer;padding:.25rem}
-.hamburger svg{width:22px;height:22px}
-@media(max-width:768px){.nav-list{display:none;position:absolute;top:100%;left:0;right:0;background:var(--carbon);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem}.nav-list.open{display:flex}.hamburger{display:block}}
-.page-hero{background:var(--carbon);color:var(--ivory);padding:7rem 2rem 5rem;margin-top:60px;position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(45,110,110,.2) 0%,transparent 60%);pointer-events:none}
-.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
-.page-tag{display:inline-block;background:rgba(143,168,155,.15);color:var(--sage);padding:.3rem .9rem;border-radius:99px;font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(143,168,155,.2);margin-bottom:1.5rem}
-.page-hero h1{font-family:var(--fs);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:1rem}
-.page-hero h1 em{font-style:normal;color:var(--sage)}
-.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.65);max-width:600px;line-height:1.75;font-weight:300}
-.section{padding:4.5rem 2rem}
-.section-inner{max-width:1100px;margin:0 auto}
-.section-label{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-bottom:.75rem}
-.section-title{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:700;letter-spacing:-.8px;line-height:1.15;margin-bottom:1rem}
-.section-sub{font-size:1rem;color:var(--slate);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-.card{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:12px;padding:1.75rem}
-.card h3{font-family:var(--fs);font-size:1rem;font-weight:600;margin-bottom:.6rem}
-.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
-.cta-section{background:var(--sage);padding:4rem 2rem;text-align:center}
-.cta-section h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--carbon);letter-spacing:-.6px;margin-bottom:.75rem}
-.cta-section p{color:rgba(15,20,25,.7);margin-bottom:2rem;font-size:.95rem}
-.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--carbon);color:var(--ivory);padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-family:var(--fs);font-weight:600;font-size:.9rem;transition:all .2s}
-.btn-dark:hover{background:#1e2d38;transform:translateY(-1px)}
-.footer{background:var(--carbon);color:rgba(246,244,241,.5);padding:3rem 2rem 1.5rem}
-.footer-inner{max-width:1100px;margin:0 auto}
-.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.footer-brand p{font-size:.85rem;margin-top:.5rem;max-width:260px;line-height:1.6}
-.footer-links{display:flex;gap:3rem;flex-wrap:wrap}
-.footer-col h4{color:var(--ivory);font-family:var(--fs);font-size:.82rem;font-weight:600;margin-bottom:.75rem}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.footer-col a{color:rgba(246,244,241,.45);text-decoration:none;font-size:.82rem;transition:color .2s}
+
+/* ── RESET & TOKENS ──────────────────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
+:root {
+  --carbon:  #0F1419;
+  --slate:   #4A5A66;
+  --sage:    #8FA89B;
+  --ivory:   #F6F4F1;
+  --sage-10: rgba(143,168,155,.10);
+  --sage-20: rgba(143,168,155,.20);
+  --fs: "Sora",    system-ui, sans-serif;
+  --fb: "Inter",   system-ui, sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+html { scroll-behavior: smooth }
+body { font-family: var(--fb); background: var(--ivory); color: var(--carbon);
+       line-height: 1.65; overflow-x: hidden }
+
+/* ── CURSOR ──────────────────────────────────────────────────────────── */
+.cursor { position:fixed; width:10px; height:10px; background:var(--sage);
+  border-radius:50%; pointer-events:none; z-index:9999; mix-blend-mode:difference;
+  transform:translate(-50%,-50%); transition:transform .15s var(--ease),
+  width .3s var(--ease), height .3s var(--ease); will-change:left,top }
+.cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid rgba(143,168,155,.5);
+  border-radius:50%; pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%); transition:left .12s var(--ease), top .12s var(--ease),
+  width .3s, height .3s, border-color .3s; will-change:left,top }
+body:has(a:hover) .cursor, body:has(button:hover) .cursor { width:20px; height:20px }
+@media(hover:none) { .cursor, .cursor-ring { display:none } }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────────── */
+.section-tag { display:inline-block; font-size:.68rem; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase; color:var(--sage);
+  margin-bottom:.75rem; font-family:var(--fs) }
+.section-title { font-family:var(--fs); font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700; letter-spacing:-1px; line-height:1.12; margin-bottom:1rem }
+.section-sub { font-size:1rem; color:var(--slate); max-width:540px;
+  line-height:1.75; margin-bottom:3rem }
+
+/* ── LAYOUT ──────────────────────────────────────────────────────────── */
+.section { padding: 6rem 2.5rem }
+.section-inner { max-width:1100px; margin:0 auto }
+.hidden { display:none !important }
+
+/* ── REVEAL ANIMATIONS ───────────────────────────────────────────────── */
+.reveal { opacity:0; transform:translateY(28px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease) }
+.reveal.visible { opacity:1; transform:translateY(0) }
+.reveal-delay-1 { transition-delay:.1s }
+.reveal-delay-2 { transition-delay:.2s }
+.reveal-delay-3 { transition-delay:.3s }
+.reveal-delay-4 { transition-delay:.4s }
+
+/* ── BUTTONS ─────────────────────────────────────────────────────────── */
+.btn { display:inline-flex; align-items:center; gap:.65rem; padding:.9rem 2rem;
+  border-radius:8px; font-family:var(--fs); font-weight:600; font-size:.9rem;
+  text-decoration:none; cursor:pointer; border:none; transition:all .2s var(--ease) }
+.btn-primary { background:var(--carbon); color:var(--ivory) }
+.btn-primary:hover { background:#1e2d38; transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(15,20,25,.2) }
+.btn-sage { background:var(--sage); color:var(--carbon) }
+.btn-sage:hover { background:#a0b9ac; transform:translateY(-2px) }
+.btn-ghost { border:1px solid rgba(246,244,241,.25); color:var(--ivory) }
+.btn-ghost:hover { border-color:rgba(246,244,241,.5); background:rgba(246,244,241,.06) }
+.btn svg { width:16px; height:16px; transition:transform .2s }
+.btn:hover svg { transform:translateX(3px) }
+
+/* ── CARDS ───────────────────────────────────────────────────────────── */
+.card-grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.5rem }
+.card-grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem }
+.card-grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.25rem }
+
+/* ── NAV ─────────────────────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.1rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  transition:background .3s,backdrop-filter .3s,box-shadow .3s;
+  background:transparent}
+.nav.scrolled{background:rgba(15,20,25,.92);backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ivory)}
+.logo-mark{width:28px;height:34px;--bg-logo:#0F1419}
+.nav-wordmark{font-family:var(--fs);font-size:1.25rem;font-weight:700;letter-spacing:-.5px;color:var(--ivory)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:1.75rem}
+.nav-item{color:rgba(246,244,241,.55);text-decoration:none;font-size:.83rem;
+  font-family:var(--fb);transition:color .2s;letter-spacing:.1px}
+.nav-item:hover{color:var(--ivory)}
+.nav-cta{background:var(--sage);color:var(--carbon)!important;padding:.5rem 1.1rem;
+  border-radius:6px;font-weight:600;font-family:var(--fs)!important;font-size:.8rem!important;
+  text-decoration:none;transition:background .2s,transform .15s}
+.nav-cta:hover{background:#a0b9ac;transform:translateY(-1px)}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;
+  flex-direction:column;gap:5px}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ivory);
+  border-radius:2px;transition:all .3s}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:820px){
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+    background:var(--carbon);flex-direction:column;justify-content:center;
+    align-items:center;gap:2rem;z-index:190}
+  .nav-links.open{display:flex}
+  .nav-item{font-size:1.1rem}
+  .nav-burger{display:flex}
+  .nav{padding:1rem 1.5rem}
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────── */
+.footer{background:var(--carbon);padding:4rem 2.5rem 2rem;margin-top:0}
+.footer-grid{max-width:1100px;margin:0 auto;display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .logo-mark{width:32px;height:38px;margin-bottom:.75rem}
+.footer-tagline{font-family:var(--fs);font-size:1.1rem;font-weight:600;
+  color:var(--ivory);margin-bottom:.5rem}
+.footer-sub{font-size:.83rem;color:rgba(246,244,241,.4);line-height:1.7}
+.footer-col h4{font-family:var(--fs);font-size:.75rem;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;color:rgba(246,244,241,.4);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.footer-col a{color:rgba(246,244,241,.55);text-decoration:none;font-size:.85rem;transition:color .2s}
 .footer-col a:hover{color:var(--ivory)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
-.footer-bottom span,.footer-bottom a{font-size:.75rem}
-.footer-bottom a{color:var(--sage);text-decoration:none}
-</style>
-<style>
+.footer-bottom{max-width:1100px;margin:0 auto;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:.5rem}
+.footer-bottom span{font-size:.75rem;color:rgba(246,244,241,.3)}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr;gap:2rem}}
+
+/* ── CONTACT ─────────────────────────────────────────────────────────── */
+.contact-section{background:#f0eeeb}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;
+  max-width:1100px;margin:0 auto}
+.contact-info h2{font-family:var(--fs);font-size:clamp(1.6rem,2.8vw,2.2rem);
+  font-weight:700;letter-spacing:-.8px;line-height:1.2;margin-bottom:1rem}
+.contact-info p{font-size:.92rem;color:var(--slate);line-height:1.75;margin-bottom:2rem}
+.contact-details{display:flex;flex-direction:column;gap:1rem}
+.contact-link{display:flex;align-items:center;gap:.75rem;text-decoration:none;
+  color:var(--carbon);font-size:.9rem;font-weight:500;transition:color .2s}
+.contact-link:hover{color:var(--sage)}
+.contact-link svg{width:18px;height:18px;color:var(--sage);flex-shrink:0}
+.contact-form{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:16px;padding:2.5rem;
+  box-shadow:0 4px 24px rgba(15,20,25,.06)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-group:last-of-type{margin-bottom:1.5rem}
+.form-group label{font-size:.75rem;font-weight:600;color:var(--slate);letter-spacing:.3px}
+.form-group input,.form-group select,.form-group textarea{
+  border:1px solid rgba(74,90,102,.18);border-radius:8px;padding:.65rem 1rem;
+  font-size:.88rem;font-family:var(--fb);background:#fafaf9;
+  transition:border .2s,box-shadow .2s;color:var(--carbon)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(143,168,155,.15)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-submit{width:100%;background:var(--carbon);color:var(--ivory);border:none;
+  padding:1rem 1.5rem;border-radius:8px;font-family:var(--fs);font-weight:600;font-size:.92rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.75rem;
+  transition:background .2s,transform .15s;margin-bottom:.75rem}
+.form-submit:hover{background:#1e2d38;transform:translateY(-1px)}
+.form-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-arrow{transition:transform .2s}
+.form-submit:not(:disabled):hover .btn-arrow{transform:translateX(4px)}
+.form-note{font-size:.75rem;color:var(--slate);text-align:center;opacity:.8}
+.form-success{display:flex!important;align-items:center;gap:.75rem;
+  background:rgba(82,201,122,.1);border:1px solid rgba(82,201,122,.3);
+  border-radius:8px;padding:1rem;margin-top:1rem;font-size:.88rem;color:#2a7a48}
+.form-success svg{width:20px;height:20px;flex-shrink:0}
+@media(max-width:768px){
+  .contact-wrap{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+
+.page-hero{background:var(--carbon);color:var(--ivory);padding:9rem 2.5rem 6rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(143,168,155,.12) 0%,transparent 55%);pointer-events:none}
+.page-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px}
+.page-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.page-tag-badge{display:inline-block;background:rgba(143,168,155,.12);color:var(--sage);border:1px solid rgba(143,168,155,.2);padding:.35rem 1rem;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;font-family:var(--fs);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .15s forwards}
+.page-hero h1{font-family:var(--fs);font-size:clamp(2.2rem,5vw,4rem);font-weight:700;line-height:1.08;letter-spacing:-2px;margin-bottom:1.25rem;opacity:0;animation:fadeUp .9s .3s forwards}
+.page-hero h1 em{font-style:normal;color:var(--sage)}
+.page-hero p{font-size:1.05rem;color:rgba(246,244,241,.6);max-width:580px;line-height:1.8;font-weight:300;opacity:0;animation:fadeUp .9s .45s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.section{padding:5.5rem 2.5rem}.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--sage);margin-bottom:.75rem;font-family:var(--fs)}
+.section-title{font-family:var(--fs);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-1px;line-height:1.12;margin-bottom:1rem}
+.section-sub{font-size:.95rem;color:var(--slate);max-width:540px;line-height:1.75;margin-bottom:3rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.card{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:14px;padding:2rem;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,20,25,.09);border-color:rgba(143,168,155,.3)}
+.card h3{font-family:var(--fs);font-size:1rem;font-weight:700;margin-bottom:.6rem}
+.card p{font-size:.85rem;color:var(--slate);line-height:1.65}
 /* CATALOG */
-.catalog-filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
-.filter-btn{background:#fff;border:1px solid rgba(74,90,102,.2);color:var(--slate);padding:.4rem .9rem;border-radius:99px;font-size:.8rem;font-family:var(--fb);cursor:pointer;transition:all .2s}
-.filter-btn.active,.filter-btn:hover{background:var(--carbon);color:var(--ivory);border-color:var(--carbon)}
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
-.product-card{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:14px;overflow:hidden;transition:all .2s;display:flex;flex-direction:column}
-.product-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,20,25,.09);border-color:rgba(143,168,155,.3)}
-.product-img{background:linear-gradient(135deg,#e8e6e2 0%,#d8d5d0 100%);height:180px;display:flex;align-items:center;justify-content:center;position:relative}
-.product-img svg{width:56px;height:56px;color:var(--slate);opacity:.35}
-.product-img img{width:100%;height:100%;object-fit:cover}
-.product-featured{position:absolute;top:.6rem;right:.6rem;background:var(--sage);color:var(--carbon);font-size:.65rem;font-weight:700;padding:.2rem .6rem;border-radius:99px;letter-spacing:.5px}
-.product-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.5rem}
-.product-category{font-size:.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage)}
-.product-name{font-family:var(--fs);font-size:1rem;font-weight:700;line-height:1.25}
-.product-desc{font-size:.82rem;color:var(--slate);line-height:1.55;flex:1}
-.product-meta{display:flex;gap:.5rem;flex-wrap:wrap}
-.meta-tag{font-size:.7rem;background:rgba(74,90,102,.08);color:var(--slate);padding:.2rem .5rem;border-radius:4px}
-.product-footer{padding:.75rem 1.25rem;border-top:1px solid rgba(74,90,102,.08);display:flex;align-items:center;justify-content:space-between}
-.product-price{font-family:var(--fs);font-size:1.15rem;font-weight:700}
-.product-price span{font-size:.7rem;font-weight:400;color:var(--slate)}
-.btn-order{background:var(--carbon);color:var(--ivory);padding:.4rem .85rem;border-radius:6px;text-decoration:none;font-size:.78rem;font-weight:600;font-family:var(--fs);transition:background .2s}
+.catalog-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.flt{background:#fff;border:1px solid rgba(74,90,102,.18);color:var(--slate);
+  padding:.4rem 1rem;border-radius:99px;font-size:.78rem;font-family:var(--fb);
+  cursor:pointer;transition:all .2s;border:none;font-weight:500}
+.flt.active,.flt:hover{background:var(--carbon);color:var(--ivory)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem}
+.prod-card{background:#fff;border:1px solid rgba(74,90,102,.1);border-radius:16px;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.prod-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(15,20,25,.1);border-color:rgba(143,168,155,.3)}
+.prod-thumb{background:linear-gradient(135deg,#e8e6e2,#d5d2cd);height:190px;
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.prod-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod-card:hover .prod-thumb img{transform:scale(1.04)}
+.prod-thumb .placeholder{width:56px;height:56px;opacity:.3;color:var(--slate)}
+.prod-badge{position:absolute;top:.65rem;right:.65rem;background:var(--sage);
+  color:var(--carbon);font-size:.62rem;font-weight:700;padding:.2rem .6rem;
+  border-radius:99px;letter-spacing:.5px}
+.prod-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.45rem}
+.prod-cat{font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sage)}
+.prod-name{font-family:var(--fs);font-size:1rem;font-weight:700;line-height:1.25}
+.prod-desc{font-size:.82rem;color:var(--slate);line-height:1.6;flex:1}
+.prod-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.25rem}
+.prod-tag{font-size:.68rem;background:rgba(74,90,102,.07);color:var(--slate);
+  padding:.15rem .5rem;border-radius:4px}
+.prod-foot{padding:.85rem 1.25rem;border-top:1px solid rgba(74,90,102,.08);
+  display:flex;align-items:center;justify-content:space-between}
+.prod-price{font-family:var(--fs);font-size:1.15rem;font-weight:700}
+.prod-price span{font-size:.7rem;font-weight:400;color:var(--slate)}
+.btn-order{background:var(--carbon);color:var(--ivory);padding:.42rem .9rem;
+  border-radius:6px;text-decoration:none;font-size:.78rem;font-weight:600;
+  font-family:var(--fs);transition:background .2s}
 .btn-order:hover{background:#1e2d38}
-.unavailable{opacity:.55}
-.unavailable .btn-order{background:var(--slate);cursor:not-allowed}
-.catalog-empty{text-align:center;padding:4rem 2rem;color:var(--slate)}.catalog-empty svg{width:48px;height:48px;opacity:.3;margin-bottom:1rem}
-#catalog-status{text-align:center;padding:3rem;color:var(--slate);font-size:.9rem}
+.btn-order.unavail{background:var(--slate);pointer-events:none}
+#cat-status{padding:3rem;text-align:center;color:var(--slate);font-size:.9rem}
+.cta-strip{background:var(--sage);padding:5rem 2.5rem;text-align:center}
+.cta-strip h2{font-family:var(--fs);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.6px;color:var(--carbon);margin-bottom:.75rem}
+.cta-strip p{color:rgba(15,20,25,.65);margin-bottom:2rem;font-size:.95rem;max-width:500px;margin-left:auto;margin-right:auto}
+.btn-wa{background:#25D366;color:#fff}
+.btn-wa:hover{background:#1fba57;transform:translateY(-2px)}
 </style>
 </head>
 <body>
-<nav class="nav">
-  <a href="index.html" class="logo-link">
-    <svg width="32" height="32" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#F6F4F1"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#F6F4F1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="logo-name">Decus</span>
+<div class="cursor"></div><div class="cursor-ring"></div>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">
+    <svg class="logo-mark" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 4L5 44L22 44C34.5 44 39 34.5 39 24C39 13.5 34.5 4 22 4Z" fill="currentColor"/>
+  <path d="M11 11L22 11C30 11 32 16 32 24C32 32 30 37 22 37L11 37Z" fill="var(--bg-logo,#0F1419)"/>
+  <path d="M15 17L24.5 24L15 31" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+    <span class="nav-wordmark">Decus</span>
   </a>
-  <ul class="nav-list" id="nav-menu">
-    <li><a href="data-analytics.html">Data &amp; Automation</a></li>
-    <li><a href="trading.html">Trading</a></li>
-    <li><a href="marketing.html">Marketing</a></li>
-    <li><a href="3d.html">3D Studio</a></li>
-    <li><a href="mailto:dvega@decus-studio.com" class="nav-cta">Contacto</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="data-analytics.html" class="nav-item">Data & Automation</a></li>
+    <li><a href="trading.html" class="nav-item">Trading</a></li>
+    <li><a href="marketing.html" class="nav-item">Marketing</a></li>
+    <li><a href="3d.html" class="nav-item">3D Studio</a></li>
+    <li><a href="#contact" class="nav-cta" data-track="nav_cta_click">Agendar diagnóstico</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
   </button>
 </nav>
+<div style="height:60px"></div>
 
 <section class="page-hero">
+  <div class="page-hero-grid"></div>
   <div class="page-hero-inner">
-    <span class="page-tag">Decus 3D Studio</span>
-    <h1>Diseño e <em>impresión 3D</em><br>para tu negocio y tu espacio.</h1>
+    <span class="page-tag-badge">Decus 3D Studio</span>
+    <h1>Diseño e <em>impresión 3D</em><br>para tu negocio.</h1>
     <p>Accesorios de oficina, figuras decorativas, piezas corporativas personalizadas y prototipos — diseñados e impresos con materiales de alta calidad.</p>
   </div>
 </section>
 
+<!-- SERVICIOS -->
 <section class="section" style="background:#f0eeeb">
   <div class="section-inner">
-    <div class="section-label">Servicios</div>
-    <h2 class="section-title">¿Qué hacemos?</h2>
+    <span class="section-tag reveal">Servicios</span>
+    <h2 class="section-title reveal reveal-delay-1">¿Qué hacemos?</h2>
     <div class="grid-3">
-      <div class="card"><h3>🖨️ Impresión bajo pedido</h3><p>Imprimimos tus diseños o los creamos desde cero. PLA, PETG, resina. Alta resolución y acabados de calidad.</p></div>
-      <div class="card"><h3>🏢 Piezas corporativas</h3><p>Logos en 3D, letreros, trofeos, regalos empresariales y accesorios de marca para oficinas o eventos.</p></div>
-      <div class="card"><h3>🎨 Diseño personalizado</h3><p>Si tenés una idea, la convertimos en un archivo 3D y la imprimimos. Diseño incluido para pedidos a medida.</p></div>
-      <div class="card"><h3>⚙️ Prototipos</h3><p>Piezas funcionales, prototipos de productos o componentes de repuesto. Ideal para emprendedores en fase de prueba.</p></div>
-      <div class="card"><h3>🎁 Regalos especiales</h3><p>Figuras decorativas, miniaturas, accesorios únicos. Perfecto para cumpleaños, bodas, eventos o regalos corporativos.</p></div>
-      <div class="card"><h3>📐 Diseño 3D</h3><p>Modelado 3D desde cero usando tus referencias, fotografías o bocetos. Te entregamos el archivo y la pieza impresa.</p></div>
+      <div class="card reveal"><h3>🖨️ Impresión bajo pedido</h3><p>Imprimimos tus diseños o los creamos desde cero. PLA, PETG, resina. Alta resolución y acabados de calidad.</p></div>
+      <div class="card reveal reveal-delay-1"><h3>🏢 Piezas corporativas</h3><p>Logos en 3D, letreros, trofeos, regalos empresariales y accesorios de marca para oficinas o eventos especiales.</p></div>
+      <div class="card reveal reveal-delay-2"><h3>🎨 Diseño personalizado</h3><p>Convertimos tu idea en un archivo 3D y lo imprimimos. Diseño incluido para pedidos a medida sin conocimientos técnicos de tu parte.</p></div>
+      <div class="card reveal"><h3>⚙️ Prototipos funcionales</h3><p>Piezas funcionales, prototipos de productos o componentes de repuesto. Ideal para emprendedores en fase de prueba de producto.</p></div>
+      <div class="card reveal reveal-delay-1"><h3>🎁 Regalos especiales</h3><p>Figuras únicas, miniaturas, accesorios personalizados. Perfecto para cumpleaños, eventos corporativos o regalos premium.</p></div>
+      <div class="card reveal reveal-delay-2"><h3>📐 Modelado 3D</h3><p>Modelado desde cero usando tus referencias, fotografías o bocetos. Te entregamos el archivo y la pieza impresa lista para usar.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CATALOG -->
-<section class="section">
+<!-- CATÁLOGO -->
+<section class="section" id="catalogo">
   <div class="section-inner">
-    <div class="section-label">Catálogo</div>
-    <h2 class="section-title">Productos disponibles</h2>
-    <p class="section-sub">Productos en inventario. También hacemos pedidos personalizados — consultá por WhatsApp o email.</p>
-    <div class="catalog-filters" id="catalog-filters">
-      <button class="filter-btn active" data-cat="todos">Todos</button>
+    <span class="section-tag reveal">Catálogo</span>
+    <h2 class="section-title reveal reveal-delay-1">Productos disponibles</h2>
+    <p class="section-sub reveal reveal-delay-2">Productos en inventario. También hacemos pedidos personalizados — consultá por WhatsApp o email.</p>
+    <div class="catalog-bar" id="catalog-bar">
+      <button class="flt active" data-cat="todos">Todos</button>
     </div>
-    <div id="catalog-status">Cargando catálogo...</div>
-    <div class="catalog-grid" id="catalog-grid" style="display:none"></div>
+    <div id="cat-status">Cargando catálogo...</div>
+    <div class="cat-grid" id="cat-grid" style="display:none"></div>
   </div>
 </section>
 
+<!-- PROCESO -->
 <section class="section" style="background:var(--carbon);color:var(--ivory)">
   <div class="section-inner">
-    <div class="section-label" style="color:rgba(143,168,155,.7)">Proceso</div>
-    <h2 class="section-title" style="color:var(--ivory)">¿Cómo pedís?</h2>
-    <div class="grid-3" style="margin-top:2rem">
-      <div style="border-left:2px solid var(--sage);padding-left:1.25rem">
-        <div style="font-family:var(--fs);font-size:2rem;font-weight:700;color:rgba(143,168,155,.3);margin-bottom:.5rem">01</div>
-        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Elegís el producto</h3>
-        <p style="font-size:.83rem;color:rgba(246,244,241,.5)">Del catálogo o describís lo que necesitás — personalizaciones, colores y materiales.</p>
+    <span class="section-tag reveal" style="color:rgba(143,168,155,.7)">Proceso</span>
+    <h2 class="section-title reveal reveal-delay-1" style="color:var(--ivory)">¿Cómo pedís?</h2>
+    <div class="grid-3" style="margin-top:2.5rem">
+      <div style="border-left:2px solid var(--sage);padding-left:1.5rem" class="reveal">
+        <div style="font-family:var(--fs);font-size:2.5rem;font-weight:700;color:rgba(143,168,155,.2);margin-bottom:.5rem">01</div>
+        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Elegís el producto o describís tu idea</h3>
+        <p style="font-size:.82rem;color:rgba(246,244,241,.45)">Del catálogo o con una descripción libre — personalizaciones, colores y materiales incluidos.</p>
       </div>
-      <div style="border-left:2px solid var(--sage);padding-left:1.25rem">
-        <div style="font-family:var(--fs);font-size:2rem;font-weight:700;color:rgba(143,168,155,.3);margin-bottom:.5rem">02</div>
-        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Confirmamos el pedido</h3>
-        <p style="font-size:.83rem;color:rgba(246,244,241,.5)">Te cotizamos, confirmamos materiales, tiempo de entrega y adelanto requerido.</p>
+      <div style="border-left:2px solid var(--sage);padding-left:1.5rem" class="reveal reveal-delay-1">
+        <div style="font-family:var(--fs);font-size:2.5rem;font-weight:700;color:rgba(143,168,155,.2);margin-bottom:.5rem">02</div>
+        <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Confirmamos y cotizamos</h3>
+        <p style="font-size:.82rem;color:rgba(246,244,241,.45)">Te confirmamos materiales, tiempo de entrega y adelanto requerido para iniciar producción.</p>
       </div>
-      <div style="border-left:2px solid var(--sage);padding-left:1.25rem">
-        <div style="font-family:var(--fs);font-size:2rem;font-weight:700;color:rgba(143,168,155,.3);margin-bottom:.5rem">03</div>
+      <div style="border-left:2px solid var(--sage);padding-left:1.5rem" class="reveal reveal-delay-2">
+        <div style="font-family:var(--fs);font-size:2.5rem;font-weight:700;color:rgba(143,168,155,.2);margin-bottom:.5rem">03</div>
         <h3 style="font-family:var(--fs);font-size:.95rem;margin-bottom:.4rem">Impresión y entrega</h3>
-        <p style="font-size:.83rem;color:rgba(246,244,241,.5)">Producción en 3–7 días hábiles según complejidad. Entrega o retiro disponible.</p>
+        <p style="font-size:.82rem;color:rgba(246,244,241,.45)">3–7 días hábiles según complejidad. Entrega o retiro disponible en San José, Costa Rica.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
-  <h2>¿Tenés un diseño en mente?</h2>
-  <p>Escribinos con tu idea y te cotizamos sin costo. Pedidos personalizados bienvenidos.</p>
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-    <a href="https://wa.me/50670142201?text=Hola%2C%20me%20interesa%20un%20pedido%20de%20impresión%203D" class="btn-dark">WhatsApp</a>
-    <a href="mailto:dvega@decus-studio.com?subject=Decus 3D — Pedido personalizado" class="btn-dark" style="background:#2A7A7A">Email</a>
+<div class="cta-strip">
+  <h2 class="reveal">¿Tenés un diseño en mente?</h2>
+  <p class="reveal reveal-delay-1">Escribinos con tu idea y te cotizamos sin costo. Pedidos personalizados siempre bienvenidos.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="reveal reveal-delay-2">
+    <a href="https://wa.me/50670142201?text=Hola%2C%20me%20interesa%20un%20pedido%20de%20impresión%203D" target="_blank" class="btn btn-primary btn-wa" data-track="3d_whatsapp">WhatsApp →</a>
+    <a href="#contact" class="btn btn-primary" style="background:var(--carbon)" data-track="3d_email">Email →</a>
   </div>
-</section>
+</div>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:8px">
-          <svg width="24" height="24" viewBox="0 0 36 44" fill="none"><path d="M4 4 L4 40 L20 40 C31 40 35 31 35 22 C35 13 31 4 20 4 Z" fill="#8FA89B"/><path d="M10 11 L20 11 C27 11 28.5 15 28.5 22 C28.5 29 27 33 20 33 L10 33 Z" fill="#0F1419"/><path d="M13 15.5 L21.5 22 L13 28.5" stroke="#8FA89B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span style="font-family:var(--fs);font-weight:700;font-size:1.1rem;color:var(--ivory)">Decus</span>
+
+<!-- ── CONTACT FORM ───────────────────────────────────────────────────── -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <span class="section-tag">Contacto</span>
+        <h2 class="contact-title">Transformemos tu información<br>en un sistema de decisión.</h2>
+        <p>Agendá un diagnóstico inicial — $40, una sola reunión, entendés exactamente qué necesita tu negocio.</p>
+        <div class="contact-details">
+          <a href="mailto:dvega@decus-studio.com" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            dvega@decus-studio.com
+          </a>
+          <a href="https://wa.me/50670142201" target="_blank" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +506 7014 2201
+          </a>
         </div>
-        <p>De datos a decisiones.</p>
       </div>
-      <div class="footer-links">
-        <div class="footer-col"><h4>Sistemas</h4><ul><li><a href="data-analytics.html">Data &amp; Automation</a></li><li><a href="trading.html">Trading</a></li><li><a href="marketing.html">Marketing</a></li><li><a href="3d.html">3D Studio</a></li></ul></div>
-        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li><li><a href="https://wa.me/50670142201">+506 7014 2201</a></li></ul></div>
-      </div>
+      <form class="contact-form" id="lead-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre *</label>
+            <input type="text" id="f-name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" id="f-email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="f-phone" placeholder="+506 ...">
+          </div>
+          <div class="form-group">
+            <label>Empresa / Negocio</label>
+            <input type="text" id="f-company" placeholder="Nombre del negocio">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>¿Qué sistema te interesa?</label>
+          <select id="f-service">
+            <option value="">Seleccioná una opción</option>
+            <option value="diagnostico">Diagnóstico Decus ($40)</option>
+            <option value="data-analytics">Data & Automation</option>
+            <option value="trading">Trading Algorítmico</option>
+            <option value="marketing">Marketing Digital</option>
+            <option value="3d" selected>3D Studio</option>
+            <option value="integral">Sistema Integral</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea id="f-message" placeholder="Contame brevemente tu situación actual..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-track="lead_form_submit">
+          <span class="btn-text">Enviar mensaje</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-loading hidden">Enviando...</span>
+        </button>
+        <p class="form-note">Respondemos en menos de 24 horas hábiles.</p>
+        <div class="form-success hidden" id="form-success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10.01-3-3"/></svg>
+          <strong>¡Mensaje enviado!</strong> Te contactamos pronto.
+        </div>
+      </form>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Decus Studio.</span>
-      <a href="index.html">← Inicio</a>
+  </div>
+</section><footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <svg class="logo-mark" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 4L5 44L22 44C34.5 44 39 34.5 39 24C39 13.5 34.5 4 22 4Z" fill="#8FA89B"/>
+  <path d="M11 11L22 11C30 11 32 16 32 24C32 32 30 37 22 37L11 37Z" fill="#0F1419"/>
+  <path d="M15 17L24.5 24L15 31" stroke="#8FA89B" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+      <p class="footer-tagline">De datos a decisiones.</p>
+      <p class="footer-sub">Sistemas digitales para negocios<br>que quieren operar con claridad.</p>
     </div>
+    <div class="footer-col">
+      <h4>Sistemas</h4>
+      <ul>
+        <li><a href="data-analytics.html">Data &amp; Automation</a></li>
+        <li><a href="trading.html">Trading Algorítmico</a></li>
+        <li><a href="marketing.html">Marketing Digital</a></li>
+        <li><a href="3d.html">3D Studio</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:dvega@decus-studio.com">dvega@decus-studio.com</a></li>
+        <li><a href="https://wa.me/50670142201" target="_blank">+506 7014 2201</a></li>
+        <li><a href="https://decus-studio.com">decus-studio.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Decus Studio · Daniel Vega S. — GMBA</span>
+    <span>Hecho con precisión en Costa Rica</span>
   </div>
 </footer>
 <script>
-const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
-hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
-document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
+// Nav burger
+const burger = document.getElementById("nav-burger");
+const links  = document.getElementById("nav-links");
+if (burger) burger.addEventListener("click", () => {
+  burger.classList.toggle("open");
+  links.classList.toggle("open");
+});
+// Nav scroll effect
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 60);
+}, { passive: true });
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const target = document.querySelector(a.getAttribute("href"));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: "smooth" }); }
+  });
+});
+</script>
+<script>
+// ── Custom cursor ─────────────────────────────────────────────────────────
+(function(){
+  const cur  = document.createElement("div"); cur.className  = "cursor";
+  const ring = document.createElement("div"); ring.className = "cursor-ring";
+  document.body.append(cur, ring);
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener("mousemove", e=>{
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx+"px"; cur.style.top=my+"px";
+  }, {passive:true});
+  (function tick(){
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left=rx+"px"; ring.style.top=ry+"px";
+    requestAnimationFrame(tick);
+  })();
+})();
+
+// ── Scroll reveal ─────────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold:.12 });
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+// ── Number counter animation ──────────────────────────────────────────────
+function animateNum(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || "";
+  const dur = 1800;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now-start)/dur,1);
+    const ease = 1-Math.pow(1-p,3);
+    const val = target < 10 ? (target*ease).toFixed(1) : Math.round(target*ease);
+    el.textContent = val + suffix;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const numObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ animateNum(e.target); numObs.unobserve(e.target); } });
+},{threshold:.5});
+document.querySelectorAll(".count-up").forEach(el=>numObs.observe(el));
+</script>
+<script src="tracking.js"></script>
+<script>
+// ── Lead Form Handler ─────────────────────────────────────────────────────
+const API_URL = "https://api.decus-studio.com";
+
+document.getElementById("lead-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const btn   = this.querySelector(".form-submit");
+  const btext = btn.querySelector(".btn-text");
+  const barr  = btn.querySelector(".btn-arrow");
+  const bload = btn.querySelector(".btn-loading");
+  const succ  = document.getElementById("form-success");
+
+  const name  = document.getElementById("f-name").value.trim();
+  const email = document.getElementById("f-email").value.trim();
+  if (!name || !email) {
+    alert("Por favor completá nombre y email.");
+    return;
+  }
+
+  btn.disabled = true;
+  btext.classList.add("hidden");
+  barr.classList.add("hidden");
+  bload.classList.remove("hidden");
+
+  const utm = window.decusUTM ? window.decusUTM() : {};
+
+  try {
+    const res = await fetch(API_URL + "/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        phone:       document.getElementById("f-phone").value.trim(),
+        company:     document.getElementById("f-company").value.trim(),
+        service:     document.getElementById("f-service").value,
+        message:     document.getElementById("f-message").value.trim(),
+        source_page: window.location.pathname,
+        ...utm
+      })
+    });
+    if (res.ok) {
+      this.style.display = "none";
+      succ.classList.remove("hidden");
+      if (window.decusTrack) window.decusTrack("lead_submitted", { service: document.getElementById("f-service").value });
+    } else {
+      throw new Error("API error " + res.status);
+    }
+  } catch(err) {
+    // Fallback: open email client
+    const mailBody = encodeURIComponent(
+      `Nombre: ${name}\nEmail: ${email}\nMensaje: ${document.getElementById("f-message").value}`
+    );
+    window.location.href = `mailto:dvega@decus-studio.com?subject=Contacto Decus&body=${mailBody}`;
+  } finally {
+    btn.disabled = false;
+    btext.classList.remove("hidden");
+    barr.classList.remove("hidden");
+    bload.classList.add("hidden");
+  }
+});
 </script>
 
 <script>
-let allProducts = [];
-let activeCategory = "todos";
-
-async function loadCatalog() {
-  try {
-    const res = await fetch("catalog.json");
-    if (!res.ok) throw new Error("No se pudo cargar el catálogo");
-    const data = await res.json();
-    allProducts = data.products || [];
-    const categories = data.categories || [];
-    
-    // Build filter buttons
-    const filtersEl = document.getElementById("catalog-filters");
-    filtersEl.innerHTML = "";
-    categories.forEach(cat => {
-      const btn = document.createElement("button");
-      btn.className = "filter-btn" + (cat.id === "todos" ? " active" : "");
-      btn.dataset.cat = cat.id;
-      btn.textContent = cat.label;
-      btn.addEventListener("click", () => {
-        activeCategory = cat.id;
-        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderProducts();
+let allProds=[], activeCat="todos";
+async function loadCatalog(){
+  try{
+    const r=await fetch("catalog.json");
+    if(!r.ok)throw new Error();
+    const d=await r.json();
+    allProds=d.products||[];
+    // Build filters
+    const bar=document.getElementById("catalog-bar");
+    bar.innerHTML="";
+    (d.categories||[]).forEach(cat=>{
+      const btn=document.createElement("button");
+      btn.className="flt"+(cat.id==="todos"?" active":"");
+      btn.dataset.cat=cat.id; btn.textContent=cat.label;
+      btn.addEventListener("click",()=>{
+        activeCat=cat.id;
+        document.querySelectorAll(".flt").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active"); render();
       });
-      filtersEl.appendChild(btn);
+      bar.appendChild(btn);
     });
-    
-    document.getElementById("catalog-status").style.display = "none";
-    document.getElementById("catalog-grid").style.display = "grid";
-    renderProducts();
-  } catch(e) {
-    document.getElementById("catalog-status").innerHTML = 
-      "<p>No se pudo cargar el catálogo. <a href=\"mailto:dvega@decus-studio.com\">Consultá directamente.</a></p>";
+    document.getElementById("cat-status").style.display="none";
+    document.getElementById("cat-grid").style.display="grid";
+    render();
+  }catch(e){
+    document.getElementById("cat-status").innerHTML=
+      "<p>No se pudo cargar el catálogo. <a href='mailto:dvega@decus-studio.com'>Consultá directamente.</a></p>";
   }
 }
-
-function renderProducts() {
-  const grid = document.getElementById("catalog-grid");
-  const filtered = activeCategory === "todos" 
-    ? allProducts 
-    : allProducts.filter(p => p.category === activeCategory);
-  
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="catalog-empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"/></svg><p>No hay productos en esta categoría aún.</p></div>`;
-    return;
-  }
-  
-  grid.innerHTML = filtered.map(p => {
-    const orderUrl = p.available
-      ? `https://wa.me/50670142201?text=Hola%2C%20me%20interesa%20el%20producto%3A%20${encodeURIComponent(p.name)}%20(%24${p.price}%20${p.currency})`
-      : "#";
-    const imgContent = p.image_url
-      ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
-      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
-    
-    return `
-    <div class="product-card${p.available ? "" : " unavailable"}">
-      <div class="product-img">
-        ${imgContent}
-        ${p.featured ? '<span class="product-featured">Destacado</span>' : ""}
-      </div>
-      <div class="product-body">
-        <span class="product-category">${p.category}</span>
-        <h3 class="product-name">${p.name}</h3>
-        <p class="product-desc">${p.description}</p>
-        <div class="product-meta">
-          ${p.material ? `<span class="meta-tag">Material: ${p.material}</span>` : ""}
-          ${p.color ? `<span class="meta-tag">Color: ${p.color}</span>` : ""}
-          ${!p.available ? '<span class="meta-tag" style="color:#c0392b">No disponible</span>' : ""}
+function render(){
+  const g=document.getElementById("cat-grid");
+  const prods=activeCat==="todos"?allProds:allProds.filter(p=>p.category===activeCat);
+  if(!prods.length){g.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--slate)">Sin productos en esta categoría.</div>';return;}
+  g.innerHTML=prods.map(p=>{
+    const wa=`https://wa.me/50670142201?text=Hola%2C%20me%20interesa%3A%20${encodeURIComponent(p.name)}%20(%24${p.price}%20${p.currency})`;
+    const thumb=p.image_url
+      ?`<img src="${p.image_url}" alt="${p.name}" loading="lazy">`
+      :`<svg class="placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
+    return `<div class="prod-card">
+      <div class="prod-thumb">${thumb}${p.featured?'<span class="prod-badge">Destacado</span>':""}</div>
+      <div class="prod-body">
+        <span class="prod-cat">${p.category}</span>
+        <h3 class="prod-name">${p.name}</h3>
+        <p class="prod-desc">${p.description}</p>
+        <div class="prod-tags">
+          ${p.material?`<span class="prod-tag">${p.material}</span>`:""}
+          ${p.color?`<span class="prod-tag">${p.color}</span>`:""}
+          ${!p.available?'<span class="prod-tag" style="color:#c0392b">Agotado</span>':""}
         </div>
       </div>
-      <div class="product-footer">
-        <div class="product-price">${p.price.toFixed(2)} <span>${p.currency}</span></div>
-        <a href="${orderUrl}" class="btn-order"${!p.available ? ' style="pointer-events:none"' : ""} ${p.available ? 'target="_blank"' : ""}>
-          ${p.available ? "Pedir →" : "Agotado"}
-        </a>
+      <div class="prod-foot">
+        <div class="prod-price">$${p.price.toFixed(2)} <span>${p.currency}</span></div>
+        ${p.available
+          ?`<a href="${wa}" target="_blank" class="btn-order" data-track="3d_order_click">Pedir →</a>`
+          :`<span class="btn-order unavail">Agotado</span>`}
       </div>
     </div>`;
   }).join("");
 }
-
 loadCatalog();
-
-// Nav hamburger
-const hamburger=document.getElementById("hamburger"),navMenu=document.getElementById("nav-menu");
-hamburger.addEventListener("click",()=>navMenu.classList.toggle("open"));
-document.querySelectorAll(".nav-list a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("open")));
 </script>
-</body>
-</html>
+</body></html>

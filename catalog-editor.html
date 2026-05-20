@@ -3,322 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Decus 3D — Editor de Catálogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<title>Catalog Editor — Decus 3D</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;--red:#e05555;--green:#52c97a}
-body{font-family:"Inter",sans-serif;background:#f5f3f0;color:var(--carbon);min-height:100vh}
-.app-header{background:var(--carbon);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.app-header h1{font-family:"Sora",sans-serif;color:#fff;font-size:1.1rem;font-weight:700}
-.app-header small{color:rgba(255,255,255,.4);font-size:.75rem}
-.app-header .badge{background:rgba(143,168,155,.2);color:var(--sage);padding:.3rem .75rem;border-radius:99px;font-size:.72rem;font-weight:600;border:1px solid rgba(143,168,155,.3)}
-.main{max-width:1200px;margin:0 auto;padding:2rem}
-.toolbar{display:flex;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:.6rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;font-family:"Sora",sans-serif;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
-.btn-primary{background:var(--carbon);color:#fff}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--carbon:#0F1419;--slate:#4A5A66;--sage:#8FA89B;--ivory:#F6F4F1;
+  --fs:"Sora",system-ui,sans-serif;--fb:"Inter",system-ui,sans-serif}
+body{font-family:var(--fb);background:var(--ivory);color:var(--carbon);min-height:100vh}
+input,select,textarea,button{font-family:var(--fb)}
+
+/* ── GATE ── */
+#gate{position:fixed;inset:0;background:var(--carbon);display:flex;
+  align-items:center;justify-content:center;z-index:9999}
+.gate-box{background:#111d25;border:1px solid rgba(143,168,155,.2);border-radius:16px;
+  padding:3rem;width:380px;text-align:center}
+.gate-logo{font-family:var(--fs);font-size:1.4rem;font-weight:700;color:var(--ivory);margin-bottom:.5rem}
+.gate-sub{font-size:.82rem;color:rgba(246,244,241,.4);margin-bottom:2rem}
+.gate-box input{width:100%;padding:.8rem 1rem;border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;background:#0d1720;color:var(--ivory);font-size:1rem;
+  letter-spacing:.1em;text-align:center;margin-bottom:1rem;outline:none}
+.gate-box input:focus{border-color:var(--sage)}
+.gate-btn{width:100%;background:var(--sage);color:var(--carbon);border:none;
+  padding:.85rem;border-radius:8px;font-family:var(--fs);font-weight:700;
+  font-size:.9rem;cursor:pointer;transition:background .2s}
+.gate-btn:hover{background:#a0b9ac}
+.gate-err{color:#e05555;font-size:.8rem;margin-top:.75rem;min-height:1.2em}
+
+/* ── MAIN UI ── */
+#app{display:none;padding:2rem;max-width:1100px;margin:0 auto}
+.header{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.header h1{font-family:var(--fs);font-size:1.5rem;font-weight:700}
+.header-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.25rem;
+  border-radius:8px;font-family:var(--fs);font-weight:600;font-size:.85rem;
+  cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-primary{background:var(--carbon);color:var(--ivory)}
 .btn-primary:hover{background:#1e2d38}
-.btn-success{background:var(--green);color:#fff}
-.btn-success:hover{background:#43b86a}
 .btn-sage{background:var(--sage);color:var(--carbon)}
 .btn-sage:hover{background:#a0b9ac}
-.btn-red{background:var(--red);color:#fff}
-.btn-red:hover{background:#c04444}
-.btn-sm{padding:.35rem .75rem;font-size:.75rem}
-.separator{width:1px;height:32px;background:rgba(0,0,0,.12)}
-.stats{display:flex;gap:1.5rem;font-size:.82rem;color:var(--slate)}
-.stats strong{color:var(--carbon);font-weight:600}
-/* FORM */
-.form-panel{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:14px;padding:2rem;margin-bottom:2rem}
-.form-panel h2{font-family:"Sora",sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid rgba(0,0,0,.08)}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.25rem}
-.form-group{display:flex;flex-direction:column;gap:.35rem}
-.form-group label{font-size:.78rem;font-weight:600;color:var(--slate);letter-spacing:.3px}
-.form-group input,.form-group select,.form-group textarea{border:1px solid rgba(0,0,0,.15);border-radius:8px;padding:.55rem .85rem;font-size:.88rem;font-family:"Inter",sans-serif;transition:border .2s;background:#fafaf9}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--sage)}
-.form-group textarea{resize:vertical;min-height:80px}
-.toggle-row{display:flex;align-items:center;gap:.75rem;padding:.75rem 0}
-.toggle-row label{font-size:.85rem;font-weight:500}
-input[type=checkbox]{width:16px;height:16px;accent-color:var(--sage);cursor:pointer}
-/* PRODUCTS LIST */
-.products-panel{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:14px;overflow:hidden}
-.products-header{padding:1.25rem 2rem;border-bottom:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between}
-.products-header h2{font-family:"Sora",sans-serif;font-size:1rem;font-weight:700}
-.product-row{display:grid;grid-template-columns:auto 1fr 90px 80px 80px;gap:1rem;padding:1rem 2rem;border-bottom:1px solid rgba(0,0,0,.06);align-items:center;transition:background .15s}
-.product-row:hover{background:#fafaf9}
-.product-row:last-child{border-bottom:none}
-.product-row-thumb{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#e8e6e2,#d5d2cd);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
-.product-row-thumb img{width:100%;height:100%;object-fit:cover}
-.product-row-info h4{font-family:"Sora",sans-serif;font-size:.88rem;font-weight:600;margin-bottom:.15rem}
-.product-row-info small{font-size:.75rem;color:var(--slate)}
-.product-row-price{font-family:"Sora",sans-serif;font-size:.95rem;font-weight:700;text-align:right}
-.status-badge{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:.5px}
-.status-available{background:rgba(82,201,122,.15);color:#2da85a}
-.status-unavailable{background:rgba(224,85,85,.12);color:var(--red)}
-.row-actions{display:flex;gap:.4rem;justify-content:flex-end}
-.no-products{padding:3rem;text-align:center;color:var(--slate);font-size:.9rem}
-/* IMPORT/EXPORT */
-.io-panel{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:14px;padding:1.5rem 2rem;margin-bottom:2rem}
-.io-panel h2{font-family:"Sora",sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1rem;color:var(--slate)}
-.io-panel p{font-size:.82rem;color:var(--slate);line-height:1.6}
-.io-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
-/* NOTIFICATION */
-.notif{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--carbon);color:#fff;padding:.85rem 1.25rem;border-radius:10px;font-size:.85rem;font-family:"Sora",sans-serif;font-weight:600;z-index:1000;transform:translateY(100px);opacity:0;transition:all .3s;max-width:320px;line-height:1.4}
-.notif.show{transform:translateY(0);opacity:1}
-.notif.success{background:#2da85a}
-.notif.error{background:var(--red)}
+.btn-danger{background:#e05555;color:#fff}
+.btn-danger:hover{background:#c0392b}
+.btn-sm{padding:.4rem .8rem;font-size:.78rem}
+
+/* ── PRODUCT LIST ── */
+.prod-list{display:flex;flex-direction:column;gap:1rem}
+.prod-row{background:#fff;border:1px solid rgba(74,90,102,.12);border-radius:12px;
+  padding:1.25rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.25rem;
+  align-items:start}
+.prod-index{font-family:var(--fs);font-size:1.2rem;font-weight:700;
+  color:rgba(74,90,102,.3);min-width:28px;padding-top:.2rem}
+.prod-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.prod-fields.wide{grid-template-columns:1fr 1fr}
+.field{display:flex;flex-direction:column;gap:.3rem}
+.field label{font-size:.7rem;font-weight:600;color:var(--slate);letter-spacing:.3px}
+.field input,.field select,.field textarea{
+  border:1px solid rgba(74,90,102,.18);border-radius:6px;padding:.55rem .75rem;
+  font-size:.84rem;background:#fafaf9;color:var(--carbon);
+  transition:border .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--sage);box-shadow:0 0 0 2px rgba(143,168,155,.15)}
+.field textarea{resize:vertical;min-height:72px}
+.prod-actions{display:flex;flex-direction:column;gap:.5rem}
+
+/* ── ADD SECTION ── */
+.add-section{margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(74,90,102,.12)}
+.add-section h2{font-family:var(--fs);font-size:1rem;font-weight:700;margin-bottom:1rem}
+.new-prod-fields{background:#fff;border:1px solid rgba(143,168,155,.3);border-radius:12px;
+  padding:1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--carbon);color:var(--ivory);
+  padding:.85rem 1.5rem;border-radius:10px;font-size:.88rem;font-weight:500;
+  opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1;transform:none}
+.toast.success{background:#2a7a48}
+.toast.error{background:#c0392b}
+
+/* ── STATUS BAR ── */
+.status-bar{background:var(--carbon);color:rgba(246,244,241,.55);
+  padding:.5rem 2rem;font-size:.78rem;display:flex;justify-content:space-between}
+
+@media(max-width:700px){
+  .prod-fields{grid-template-columns:1fr 1fr}
+  .prod-row{grid-template-columns:1fr;gap:.75rem}
+  .new-prod-fields{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .prod-fields,.new-prod-fields{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<div class="app-header">
-  <div>
-    <h1>Decus 3D — Editor de Catálogo</h1>
-    <small>Herramienta local de administración</small>
+<!-- ── PASSWORD GATE ── -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">Decus 3D · Editor</div>
+    <p class="gate-sub">Acceso restringido — ingresá la clave de administrador</p>
+    <input type="password" id="gate-pwd" placeholder="Contraseña" autocomplete="off">
+    <button class="gate-btn" id="gate-btn">Entrar</button>
+    <p class="gate-err" id="gate-err"></p>
   </div>
-  <span class="badge">Solo uso local</span>
 </div>
 
-<div class="main">
+<!-- ── STATUS BAR ── -->
+<div class="status-bar" id="status-bar" style="display:none">
+  <span>Decus 3D Catalog Editor</span>
+  <span id="status-info">Cargando...</span>
+</div>
 
-  <div class="io-panel">
-    <h2>📂 Importar / Exportar</h2>
-    <p>Para actualizar el catálogo en tu sitio web: editá los productos acá, exportá el JSON y subí el archivo <strong>catalog.json</strong> a tu repositorio de GitHub.</p>
-    <div class="io-actions">
-      <label class="btn btn-sage" style="cursor:pointer">
-        📁 Cargar catalog.json
-        <input type="file" id="import-file" accept=".json" style="display:none">
-      </label>
-      <button class="btn btn-success" onclick="exportCatalog()">⬇️ Exportar catalog.json</button>
-      <button class="btn btn-primary" onclick="loadSample()">▶ Cargar ejemplo</button>
+<!-- ── MAIN APP ── -->
+<div id="app">
+  <div class="header">
+    <h1>Catálogo 3D</h1>
+    <div class="header-actions">
+      <button class="btn btn-sage" id="load-btn">Cargar catalog.json</button>
+      <button class="btn btn-primary" id="export-btn">Exportar JSON</button>
     </div>
   </div>
 
-  <div class="form-panel">
-    <h2 id="form-title">➕ Agregar Nuevo Producto</h2>
-    <input type="hidden" id="edit-id">
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Nombre del producto *</label>
-        <input type="text" id="f-name" placeholder="Ej: Porta Tarjetas Empresarial">
-      </div>
-      <div class="form-group">
-        <label>Categoría *</label>
-        <select id="f-category">
-          <option value="oficina">Oficina</option>
-          <option value="decoracion">Decoración</option>
-          <option value="tecnologia">Tecnología</option>
-          <option value="corporativo">Corporativo</option>
-          <option value="hogar">Hogar</option>
-          <option value="otro">Otro</option>
+  <div class="prod-list" id="prod-list"></div>
+
+  <div class="add-section">
+    <h2>Agregar producto</h2>
+    <div class="new-prod-fields" id="new-form">
+      <div class="field"><label>Nombre *</label><input id="n-name" placeholder="Porta tarjetas..."></div>
+      <div class="field"><label>Categoría</label>
+        <select id="n-cat">
+          <option value="accesorios">accesorios</option>
+          <option value="corporativo">corporativo</option>
+          <option value="decoracion">decoracion</option>
+          <option value="personalizado">personalizado</option>
+          <option value="prototipo">prototipo</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Precio (USD) *</label>
-        <input type="number" id="f-price" placeholder="0.00" min="0" step="0.01">
+      <div class="field"><label>Precio (USD) *</label><input id="n-price" type="number" step="0.01" placeholder="12.00"></div>
+      <div class="field"><label>Material</label><input id="n-mat" placeholder="PLA, PETG, Resina..."></div>
+      <div class="field"><label>Color</label><input id="n-color" placeholder="Negro, Blanco..."></div>
+      <div class="field"><label>URL imagen</label><input id="n-img" placeholder="https://..."></div>
+      <div class="field" style="grid-column:1/-1"><label>Descripción *</label>
+        <textarea id="n-desc" placeholder="Descripción del producto..."></textarea>
       </div>
-      <div class="form-group">
-        <label>Material</label>
-        <input type="text" id="f-material" placeholder="Ej: PLA, PETG, Resina">
+      <div class="field"><label>Destacado</label>
+        <select id="n-featured"><option value="false">No</option><option value="true">Sí</option></select>
       </div>
-      <div class="form-group">
-        <label>Color</label>
-        <input type="text" id="f-color" placeholder="Ej: Negro / Blanco / A elegir">
+      <div class="field"><label>Disponible</label>
+        <select id="n-avail"><option value="true">Sí</option><option value="false">No</option></select>
       </div>
-      <div class="form-group">
-        <label>URL de imagen (opcional)</label>
-        <input type="url" id="f-image" placeholder="https://...">
+      <div class="field" style="align-self:end">
+        <button class="btn btn-sage" id="add-btn" style="width:100%">Agregar producto</button>
       </div>
-    </div>
-    <div class="form-group" style="margin-bottom:1rem">
-      <label>Descripción *</label>
-      <textarea id="f-desc" placeholder="Describí el producto, características, usos..."></textarea>
-    </div>
-    <div style="display:flex;gap:2rem;margin-bottom:1.25rem">
-      <div class="toggle-row">
-        <input type="checkbox" id="f-available" checked>
-        <label for="f-available">Disponible para venta</label>
-      </div>
-      <div class="toggle-row">
-        <input type="checkbox" id="f-featured">
-        <label for="f-featured">Producto destacado</label>
-      </div>
-    </div>
-    <div style="display:flex;gap:.75rem">
-      <button class="btn btn-primary" onclick="saveProduct()">💾 Guardar producto</button>
-      <button class="btn btn-sage" onclick="clearForm()">✕ Cancelar</button>
     </div>
   </div>
-
-  <div class="toolbar">
-    <div class="stats">
-      <span>Total: <strong id="stat-total">0</strong></span>
-      <span>Disponibles: <strong id="stat-available">0</strong></span>
-      <span>Destacados: <strong id="stat-featured">0</strong></span>
-    </div>
-    <div class="separator"></div>
-    <a href="3d.html" target="_blank" class="btn btn-sage btn-sm">🔗 Ver sitio 3D</a>
-  </div>
-
-  <div class="products-panel">
-    <div class="products-header">
-      <h2>Productos en el catálogo</h2>
-    </div>
-    <div id="products-list"><div class="no-products">No hay productos. Cargá un catalog.json o agregá uno nuevo.</div></div>
-  </div>
-
 </div>
 
-<div class="notif" id="notif"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-let catalog = { products: [], categories: [
-  {id:"todos",label:"Todos"},{id:"oficina",label:"Oficina"},{id:"decoracion",label:"Decoración"},
-  {id:"tecnologia",label:"Tecnología"},{id:"corporativo",label:"Corporativo"},{id:"hogar",label:"Hogar"},{id:"otro",label:"Otro"}
-], last_updated: "", contact: "dvega@decus-studio.com", whatsapp: "+50670142201" };
+// ── Config ────────────────────────────────────────────────────────────────────
+const CATALOG_PW = "decus3d2026";   // change this in production
 
-let editingId = null;
+// ── Gate ──────────────────────────────────────────────────────────────────────
+const gate = document.getElementById("gate");
+const gateErr = document.getElementById("gate-err");
+const gatePwd = document.getElementById("gate-pwd");
 
-function generateId() {
-  return "prod_" + Date.now().toString(36) + Math.random().toString(36).substr(2,4);
+function tryUnlock() {
+  if (gatePwd.value === CATALOG_PW) {
+    gate.style.display = "none";
+    document.getElementById("app").style.display = "block";
+    document.getElementById("status-bar").style.display = "flex";
+    loadCatalog();
+  } else {
+    gateErr.textContent = "Contraseña incorrecta.";
+    gatePwd.value = "";
+    gatePwd.focus();
+  }
 }
 
-function notify(msg, type="success") {
-  const el = document.getElementById("notif");
+document.getElementById("gate-btn").addEventListener("click", tryUnlock);
+gatePwd.addEventListener("keydown", e => { if (e.key === "Enter") tryUnlock(); });
+gatePwd.focus();
+
+// ── State ──────────────────────────────────────────────────────────────────────
+let catalog = { categories: [], products: [] };
+
+// ── Toast ──────────────────────────────────────────────────────────────────────
+function toast(msg, type = "") {
+  const el = document.getElementById("toast");
   el.textContent = msg;
-  el.className = "notif " + type + " show";
+  el.className = "toast show " + type;
   setTimeout(() => el.classList.remove("show"), 3000);
 }
 
-function saveProduct() {
-  const name = document.getElementById("f-name").value.trim();
-  const desc = document.getElementById("f-desc").value.trim();
-  const price = parseFloat(document.getElementById("f-price").value);
-  if (!name || !desc || isNaN(price)) { notify("Completá nombre, descripción y precio.", "error"); return; }
-  
-  const product = {
-    id: editingId || generateId(),
-    name, description: desc, price,
-    currency: "USD",
-    category: document.getElementById("f-category").value,
-    material: document.getElementById("f-material").value.trim(),
-    color: document.getElementById("f-color").value.trim(),
-    image_url: document.getElementById("f-image").value.trim(),
-    available: document.getElementById("f-available").checked,
-    featured: document.getElementById("f-featured").checked
-  };
-  
-  if (editingId) {
-    const idx = catalog.products.findIndex(p => p.id === editingId);
-    if (idx !== -1) catalog.products[idx] = product;
-    notify("Producto actualizado ✓");
-  } else {
-    catalog.products.push(product);
-    notify("Producto agregado ✓");
-  }
-  clearForm();
-  renderProducts();
-}
-
-function editProduct(id) {
-  const p = catalog.products.find(p => p.id === id);
-  if (!p) return;
-  editingId = id;
-  document.getElementById("edit-id").value = id;
-  document.getElementById("f-name").value = p.name;
-  document.getElementById("f-desc").value = p.description;
-  document.getElementById("f-price").value = p.price;
-  document.getElementById("f-category").value = p.category;
-  document.getElementById("f-material").value = p.material || "";
-  document.getElementById("f-color").value = p.color || "";
-  document.getElementById("f-image").value = p.image_url || "";
-  document.getElementById("f-available").checked = p.available;
-  document.getElementById("f-featured").checked = p.featured;
-  document.getElementById("form-title").textContent = "✏️ Editando: " + p.name;
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function deleteProduct(id) {
-  if (!confirm("¿Eliminás este producto del catálogo?")) return;
-  catalog.products = catalog.products.filter(p => p.id !== id);
-  notify("Producto eliminado.", "error");
-  renderProducts();
-}
-
-function clearForm() {
-  editingId = null;
-  ["f-name","f-desc","f-price","f-material","f-color","f-image"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("f-category").value = "oficina";
-  document.getElementById("f-available").checked = true;
-  document.getElementById("f-featured").checked = false;
-  document.getElementById("form-title").textContent = "➕ Agregar Nuevo Producto";
-}
-
+// ── Render products ────────────────────────────────────────────────────────────
 function renderProducts() {
-  const list = document.getElementById("products-list");
-  const products = catalog.products;
-  
-  document.getElementById("stat-total").textContent = products.length;
-  document.getElementById("stat-available").textContent = products.filter(p=>p.available).length;
-  document.getElementById("stat-featured").textContent = products.filter(p=>p.featured).length;
-  
-  if (products.length === 0) {
-    list.innerHTML = '<div class="no-products">No hay productos en el catálogo.</div>';
+  const list = document.getElementById("prod-list");
+  if (!catalog.products.length) {
+    list.innerHTML = '<p style="color:var(--slate);font-size:.88rem">No hay productos. Cargá un catalog.json o agregá productos abajo.</p>';
     return;
   }
-  list.innerHTML = products.map(p => `
-    <div class="product-row">
-      <div class="product-row-thumb">
-        ${p.image_url ? `<img src="${p.image_url}" alt="${p.name}">` : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'}
+  list.innerHTML = catalog.products.map((p, i) => `
+    <div class="prod-row" id="row-${i}">
+      <div class="prod-index">${i + 1}</div>
+      <div>
+        <div class="prod-fields">
+          <div class="field"><label>Nombre</label>
+            <input value="${esc(p.name)}" onchange="update(${i},'name',this.value)"></div>
+          <div class="field"><label>Categoría</label>
+            <input value="${esc(p.category||'')}" onchange="update(${i},'category',this.value)"></div>
+          <div class="field"><label>Precio USD</label>
+            <input type="number" step="0.01" value="${p.price||0}" onchange="update(${i},'price',parseFloat(this.value))"></div>
+          <div class="field"><label>Material</label>
+            <input value="${esc(p.material||'')}" onchange="update(${i},'material',this.value)"></div>
+          <div class="field"><label>Color</label>
+            <input value="${esc(p.color||'')}" onchange="update(${i},'color',this.value)"></div>
+          <div class="field"><label>URL imagen</label>
+            <input value="${esc(p.image_url||'')}" onchange="update(${i},'image_url',this.value)"></div>
+        </div>
+        <div class="prod-fields wide" style="margin-top:.65rem">
+          <div class="field"><label>Descripción</label>
+            <textarea onchange="update(${i},'description',this.value)">${esc(p.description||'')}</textarea></div>
+          <div class="prod-fields" style="gap:.65rem">
+            <div class="field"><label>Destacado</label>
+              <select onchange="update(${i},'featured',this.value==='true')">
+                <option value="false" ${!p.featured?"selected":""}>No</option>
+                <option value="true" ${p.featured?"selected":""}>Sí</option>
+              </select></div>
+            <div class="field"><label>Disponible</label>
+              <select onchange="update(${i},'available',this.value==='true')">
+                <option value="true" ${p.available!==false?"selected":""}>Sí</option>
+                <option value="false" ${p.available===false?"selected":""}>No</option>
+              </select></div>
+          </div>
+        </div>
       </div>
-      <div class="product-row-info">
-        <h4>${p.name} ${p.featured ? '⭐' : ""}</h4>
-        <small>${p.category} · ${p.material || "Sin material"} · ${p.color || ""}</small>
-      </div>
-      <div class="product-row-price">$${p.price.toFixed(2)}</div>
-      <div><span class="status-badge ${p.available ? "status-available" : "status-unavailable"}">${p.available ? "ACTIVO" : "INACTIVO"}</span></div>
-      <div class="row-actions">
-        <button class="btn btn-sage btn-sm" onclick="editProduct('${p.id}')">Editar</button>
-        <button class="btn btn-red btn-sm" onclick="deleteProduct('${p.id}')">✕</button>
+      <div class="prod-actions">
+        <button class="btn btn-sm btn-danger" onclick="removeProduct(${i})">Eliminar</button>
+        <button class="btn btn-sm btn-primary" onclick="moveUp(${i})" ${i===0?"disabled":""}>↑</button>
+        <button class="btn btn-sm btn-primary" onclick="moveDown(${i})" ${i===catalog.products.length-1?"disabled":""}>↓</button>
       </div>
     </div>
   `).join("");
+  document.getElementById("status-info").textContent = `${catalog.products.length} productos`;
 }
 
-function exportCatalog() {
-  catalog.last_updated = new Date().toISOString().split("T")[0];
-  const json = JSON.stringify(catalog, null, 2);
-  const blob = new Blob([json], {type: "application/json"});
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+}
+
+function update(i, key, val) {
+  catalog.products[i][key] = val;
+}
+
+function removeProduct(i) {
+  if (!confirm(`¿Eliminar "${catalog.products[i].name}"?`)) return;
+  catalog.products.splice(i, 1);
+  renderProducts();
+  toast("Producto eliminado", "");
+}
+
+function moveUp(i) {
+  if (i === 0) return;
+  [catalog.products[i-1], catalog.products[i]] = [catalog.products[i], catalog.products[i-1]];
+  renderProducts();
+}
+
+function moveDown(i) {
+  if (i >= catalog.products.length - 1) return;
+  [catalog.products[i], catalog.products[i+1]] = [catalog.products[i+1], catalog.products[i]];
+  renderProducts();
+}
+
+// ── Load catalog.json ──────────────────────────────────────────────────────────
+async function loadCatalog() {
+  try {
+    const r = await fetch("catalog.json?" + Date.now());
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    catalog = await r.json();
+    renderProducts();
+    toast("catalog.json cargado", "success");
+  } catch(e) {
+    document.getElementById("status-info").textContent = "Sin datos";
+    toast("No se pudo cargar catalog.json — empezá desde cero", "error");
+    renderProducts();
+  }
+}
+
+document.getElementById("load-btn").addEventListener("click", loadCatalog);
+
+// ── Add product ────────────────────────────────────────────────────────────────
+document.getElementById("add-btn").addEventListener("click", () => {
+  const name = document.getElementById("n-name").value.trim();
+  const desc = document.getElementById("n-desc").value.trim();
+  const price = parseFloat(document.getElementById("n-price").value) || 0;
+  if (!name || !desc) { toast("Nombre y descripción son obligatorios", "error"); return; }
+  catalog.products.push({
+    id: "prod-" + Date.now(),
+    name,
+    description: desc,
+    category: document.getElementById("n-cat").value,
+    price,
+    currency: "USD",
+    material: document.getElementById("n-mat").value.trim(),
+    color: document.getElementById("n-color").value.trim(),
+    image_url: document.getElementById("n-img").value.trim() || null,
+    featured: document.getElementById("n-featured").value === "true",
+    available: document.getElementById("n-avail").value === "true",
+  });
+  // Reset form
+  ["n-name","n-desc","n-price","n-mat","n-color","n-img"].forEach(id => {
+    document.getElementById(id).value = "";
+  });
+  renderProducts();
+  toast("Producto agregado", "success");
+});
+
+// ── Export JSON ────────────────────────────────────────────────────────────────
+document.getElementById("export-btn").addEventListener("click", () => {
+  // Rebuild categories from products
+  const cats = [...new Set(catalog.products.map(p => p.category).filter(Boolean))];
+  const categories = [
+    { id: "todos", label: "Todos" },
+    ...cats.map(c => ({ id: c, label: c.charAt(0).toUpperCase() + c.slice(1) }))
+  ];
+  const out = JSON.stringify({ categories, products: catalog.products }, null, 2);
+  const blob = new Blob([out], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url; a.download = "catalog.json"; a.click();
   URL.revokeObjectURL(url);
-  notify("catalog.json descargado. Subilo a GitHub ✓");
-}
-
-function loadSample() {
-  fetch("catalog.json")
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(data => { catalog = data; renderProducts(); notify("Catálogo cargado desde catalog.json ✓"); })
-    .catch(() => notify("No se encontró catalog.json. Usá el botón de importar.", "error"));
-}
-
-document.getElementById("import-file").addEventListener("change", function() {
-  const file = this.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      catalog = JSON.parse(e.target.result);
-      renderProducts();
-      notify("Catálogo importado: " + catalog.products.length + " productos ✓");
-    } catch { notify("Archivo JSON inválido.", "error"); }
-  };
-  reader.readAsText(file);
-  this.value = "";
+  toast("catalog.json exportado — subilo al repo para publicar", "success");
 });
-
-renderProducts();
 </script>
 </body>
 </html>
